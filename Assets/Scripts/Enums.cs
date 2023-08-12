@@ -12,3 +12,9 @@ public enum GameState
     None,Lobby,Playing
 }
 
+public enum RouteType
+{
+    A,B,C,D
+}
+
+

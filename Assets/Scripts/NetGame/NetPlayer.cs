@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NetPlayer : NetworkBehaviour
 {
@@ -11,17 +13,63 @@ public class NetPlayer : NetworkBehaviour
     public int GivenId;
     public int ChosenCharacter;
 
+    //测试用
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            TestSServerRpc(KeyCode.I);
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            TestSServerRpc(KeyCode.I);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            TestSServerRpc(KeyCode.I);
+        }
+    }
+
+    [ServerRpc]
+    private void TestSServerRpc(KeyCode key)
+    {
+        switch (key)
+        {
+            case KeyCode.I:
+                break;
+            case KeyCode.O:
+                break;
+            case KeyCode.P:
+                break;
+        }
+    }
+    
+
     public override void OnNetworkSpawn()
     {
         if (IsOwner)
         {
-            PlayerName = GameManager.Instance.playerName;
-            OwnerInstance = this;
-            PlayerRegisterServerRpc(PlayerName,(int)OwnerClientId);
+            if (GameManager.Instance.CurrentGameState == GameState.Lobby)
+            {
+                PlayerName = GameManager.Instance.playerName;
+                OwnerInstance = this;
+                PlayerRegisterServerRpc(PlayerName,(int)OwnerClientId);
+                
+                if (IsServer)
+                {
+                    NetworkManager.Singleton.SceneManager.OnLoadComplete += OnGameSceneLoaded;
+                }
+            }
+            
+            Debug.Log("Spawn at"+GameManager.Instance.CurrentGameState);
+            
         }
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
-    
+
+
     [ServerRpc]
     private void PlayerRegisterServerRpc(string name,int netId)
     {
@@ -42,7 +90,8 @@ public class NetPlayer : NetworkBehaviour
         
         for (int i = 0; i < count+1; i++)
         {
-            PlayerRegisterClientRpc(i,infos.PlayerNames[i],infos.netId[i],infos.ChosenCharacter[i]);
+            PlayerRegisterClientRpc(i,infos.PlayerNames[i],infos.netId[i],
+                infos.ChosenCharacter[i],infos.Ready[i]);
             // GameManager.Instance.playersInfo.playerCount = i + 1;
             // GameManager.Instance.playersInfo.PlayerNames[i] = infos.PlayerNames[i];
             // GameManager.Instance.playersInfo.netId[i] = infos.netId[i];
@@ -52,12 +101,12 @@ public class NetPlayer : NetworkBehaviour
     }
     
     [ClientRpc]
-    private void PlayerRegisterClientRpc(int id,string _name,int netId,int character)
+    private void PlayerRegisterClientRpc(int id,string _name,int netId,int character,bool ready)
     {
         GameManager.Instance.playersInfo.playerCount = id + 1;
         GameManager.Instance.playersInfo.PlayerNames[id] = _name;
         GameManager.Instance.playersInfo.netId[id] = netId;
-        Lobby.Instance.RefreshPlayerInLobby(id,_name,character);
+        Lobby.Instance.RefreshPlayerInLobby(id,_name,character,ready);
     }
 
     [ClientRpc]
@@ -72,10 +121,18 @@ public class NetPlayer : NetworkBehaviour
     {
         GivenId = givenId;
     }
-
-    public NetworkObject GetNetworkObject()
+    
+    
+    //进入正式游戏场景，Server调用
+    private void OnGameSceneLoaded(ulong clientid, string scenename, LoadSceneMode loadscenemode)
     {
-        return NetworkObject;
+        if(GameManager.Instance.CurrentGameState!=GameState.Playing)
+            return;
+        Debug.Log($"{GameManager.Instance.FindPlayerIdByClientId((int)clientid)}({clientid}) load scene complete");
+        
+        // var p = Instantiate(GameManager.Instance.TestObject).GetComponent<NetworkObject>();
+        // p.SpawnWithOwnership(clientid);
+        // p.DontDestroyWithOwner = true;
     }
 
 }

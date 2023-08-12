@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     
     [Header("Data")] 
     public CharacterList GameCharacterSpriteList;
+    public GameObject TestObject;
 
     [Header("GameServerInfo")] 
     // public List<NetworkObject> AllPlayer = new List<NetworkObject>();

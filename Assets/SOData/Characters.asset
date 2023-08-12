@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Empty: {fileID: 21300000, guid: 7799ce3d932b2f9499323e672463c0dc, type: 3}
   characters:
-  - {fileID: 21300000, guid: 9b24db462708c294a9fd762ed53627cd, type: 3}
-  - {fileID: 21300000, guid: a45b895189f016040bc2bb16b0b9a721, type: 3}
-  - {fileID: 21300000, guid: 0e4ba77d1b4b7d54b96caacaaf8ad36e, type: 3}
-  - {fileID: 21300000, guid: 8bf7f741607529945bf90373bdf087af, type: 3}
-  - {fileID: 21300000, guid: 53f3b871754e3874fa539685e0551535, type: 3}
-  - {fileID: 21300000, guid: 0bef83e9a2b6e2f46bc122ab99a3ba09, type: 3}
+  - {fileID: 21300000, guid: f7565f13fcc722443b9441cbec29cdce, type: 3}
+  - {fileID: 21300000, guid: 1dd9eb4e7698f1f4a947f06a53ed66a0, type: 3}
+  - {fileID: 21300000, guid: ad5fedceee80ac448857c88437c12e49, type: 3}
+  - {fileID: 21300000, guid: da89eed5cf1c0434c8666c082d3604a7, type: 3}
+  - {fileID: 21300000, guid: c4dc2dbe3092c514a9d63b8c4d84f484, type: 3}
+  - {fileID: 21300000, guid: 8050d654fe1b0a641b3454d376029773, type: 3}

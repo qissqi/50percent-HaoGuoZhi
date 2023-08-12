@@ -6,6 +6,7 @@ using TMPro;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
@@ -13,7 +14,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject startPanel;
     [SerializeField] private GameObject roomSlotPrefab;
     private ExampleNetworkDiscovery networkDiscovery;
-    Dictionary<IPAddress, DiscoveryResponseData> discoveredServers = new Dictionary<IPAddress, DiscoveryResponseData>();
+    Dictionary<IPEndPoint, DiscoveryResponseData> discoveredServers = new Dictionary<IPEndPoint, DiscoveryResponseData>();
     private List<GameObject> roomsList=new List<GameObject>();
     //[SerializeField] private Lobby lobbyController;
     [SerializeField] private GameObject lobbyPanel;
@@ -24,13 +25,21 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Transform roomContent;
     //[SerializeField] private GameObject currentSelectedRoom;
     [SerializeField] private string currentSelectedIp;
+    [SerializeField] private int currenSelectedPort; 
     [SerializeField] private string currentSelectedPsw;
     
     [Header("创建房间界面")]
     [SerializeField] private GameObject createRoomPanel;
     [SerializeField] private Toggle psw_toggle;
-    [SerializeField] private TMP_InputField roomNameField;
-    [SerializeField] private TMP_InputField roomPswField;
+    [SerializeField] private TMP_InputField create_RoomNameField;
+    [SerializeField] private TMP_InputField create_RoomPswField;
+
+    [Header("手动加入房间")] 
+    [SerializeField] private GameObject joinRoomPanel;
+    [SerializeField] private TMP_InputField join_RoomIpField;
+    [SerializeField] private TMP_InputField join_RoomPortField;
+    [SerializeField] private Button join_ConfirmButton;
+    
 
     void Update()
     {
@@ -58,13 +67,8 @@ public class MainMenu : MonoBehaviour
     private void OnServerFound(IPEndPoint arg0, DiscoveryResponseData arg1)
     {
         Debug.Log($"Found Server: {arg0.Address}");
-        discoveredServers.Add(arg0.Address,arg1);
-        AddRoom(arg0.Address,arg1);
-    }
-
-    public void RoomSelected(GameObject obj)
-    {
-        
+        discoveredServers.Add(arg0,arg1);
+        AddRoom(arg0.Address,arg0.Port,arg1);
     }
 
     public void EditNameEnd()
@@ -81,10 +85,10 @@ public class MainMenu : MonoBehaviour
     
     public void CreateClick()
     {
-        roomPswField.text = "";
-        roomPswField.GetComponent<Image>().color=Color.gray;
-        roomPswField.readOnly = true;
-        roomNameField.text = "";
+        create_RoomPswField.text = "";
+        create_RoomPswField.GetComponent<Image>().color=Color.gray;
+        create_RoomPswField.readOnly = true;
+        create_RoomNameField.text = GameManager.Instance.playerName;
         psw_toggle.isOn = false;
         createRoomPanel.SetActive(true);
     }
@@ -92,13 +96,13 @@ public class MainMenu : MonoBehaviour
     //主机创建房间
     public void OnCreateRoomConfirmClick()
     {
-        if (string.IsNullOrEmpty(roomNameField.text))
+        if (string.IsNullOrEmpty(create_RoomNameField.text))
         {
             Debug.Log("Room name empty");
             return;
         }
 
-        if (psw_toggle.isOn && string.IsNullOrEmpty(roomPswField.text))
+        if (psw_toggle.isOn && string.IsNullOrEmpty(create_RoomPswField.text))
         {
             Debug.Log("Room password empty");
             return;
@@ -108,8 +112,8 @@ public class MainMenu : MonoBehaviour
         //TODO:启动Server，配置信息，进入大厅
 
         createRoomPanel.SetActive(false);
-        networkDiscovery.ServerName = roomNameField.text;
-        networkDiscovery.Password = roomPswField.text;
+        networkDiscovery.ServerName = create_RoomNameField.text;
+        networkDiscovery.Password = create_RoomPswField.text;
         networkDiscovery.StartServer();
         
         NetworkManager.Singleton.StartHost();
@@ -128,7 +132,20 @@ public class MainMenu : MonoBehaviour
 
     public void JoinClick()
     {
-        //NetworkManager.Singleton.StartClient();
+        join_RoomIpField.text = "";
+        join_RoomPortField.text = "";
+        joinRoomPanel.SetActive(true);
+
+    }
+
+    public void JoinConfirmClick()
+    {
+        if(string.IsNullOrEmpty(join_RoomIpField.text) || string.IsNullOrEmpty(join_RoomPortField.text))
+            return;
+        
+        JoinRoom(join_RoomIpField.text,int.Parse(join_RoomPortField.text));
+        joinRoomPanel.SetActive(false);
+        
     }
 
 
@@ -150,11 +167,11 @@ public class MainMenu : MonoBehaviour
         roomsList.Clear();
         foreach (var server in discoveredServers)
         {
-            AddRoom(server.Key,server.Value);
+            AddRoom(server.Key.Address,server.Key.Port,server.Value);
         }
     }
 
-    private void AddRoom(IPAddress ipAddress,DiscoveryResponseData data)
+    private void AddRoom(IPAddress ipAddress,int port,DiscoveryResponseData data)
     {
         string dataServerName = data.ServerName;
         string ip = ipAddress.ToString();
@@ -167,7 +184,7 @@ public class MainMenu : MonoBehaviour
 
         bg.GetComponent<Button>().onClick.AddListener((() =>
         {
-            RoomClick(ip,data);
+            RoomClick(ip,port,data);
         }));
         nameField.text = dataServerName;
         ipField.text = ip;
@@ -178,11 +195,12 @@ public class MainMenu : MonoBehaviour
         roomsList.Add(room);
     }
 
-    public void RoomClick(string ip,DiscoveryResponseData data)
+    public void RoomClick(string ip,int port,DiscoveryResponseData data)
     {
         currentSelectedIp = ip;
+        currenSelectedPort = port;
         currentSelectedPsw = data.Password;
-        JoinRoom(ip);
+        JoinRoom(ip,port);
     }
 
     public void NetworkShutDown()
@@ -191,9 +209,10 @@ public class MainMenu : MonoBehaviour
     }
     
     
-    public void JoinRoom(string IP)
+    public void JoinRoom(string IP,int port)
     {
-        //NetworkManager.Singleton.GetComponent<UnityTransport>().ConnectionData.Address = IP;
+        NetworkManager.Singleton.GetComponent<UnityTransport>().ConnectionData.Address = IP;
+        NetworkManager.Singleton.GetComponent<UnityTransport>().ConnectionData.Port = (ushort)port;
         
         GameManager.Instance.CurrentGameState = GameState.Lobby;
         if (NetworkManager.Singleton.StartClient())
@@ -209,12 +228,6 @@ public class MainMenu : MonoBehaviour
         //lobbyController.gameObject.SetActive(true);
         lobbyPanel.SetActive(true);
     }
-
-    public void DebugIp()
-    {
-        NetworkTransport transport;
-        
-    }
     
     
     
@@ -222,15 +235,15 @@ public class MainMenu : MonoBehaviour
     {
         if (psw_toggle.isOn)
         {
-            roomPswField.readOnly = false;
-            roomPswField.GetComponent<Image>().color=Color.white;
+            create_RoomPswField.readOnly = false;
+            create_RoomPswField.GetComponent<Image>().color=Color.white;
             
         }
         else
         {
-            roomPswField.text = "";
-            roomPswField.GetComponent<Image>().color=Color.gray;
-            roomPswField.readOnly = true;
+            create_RoomPswField.text = "";
+            create_RoomPswField.GetComponent<Image>().color=Color.gray;
+            create_RoomPswField.readOnly = true;
         }
     }
     
