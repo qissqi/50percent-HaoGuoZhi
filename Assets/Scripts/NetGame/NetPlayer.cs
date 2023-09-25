@@ -16,6 +16,9 @@ public class NetPlayer : NetworkBehaviour
     //测试用
     private void Update()
     {
+        if(!GameDataManager.Instance)
+            return;
+        
         if (Input.GetKeyDown(KeyCode.I))
         {
             TestSServerRpc(KeyCode.I);
@@ -46,7 +49,6 @@ public class NetPlayer : NetworkBehaviour
         }
     }
     
-
     public override void OnNetworkSpawn()
     {
         if (IsOwner)
@@ -69,7 +71,8 @@ public class NetPlayer : NetworkBehaviour
         //DontDestroyOnLoad(this);
     }
 
-
+    #region 大厅登录
+    
     [ServerRpc]
     private void PlayerRegisterServerRpc(string name,int netId)
     {
@@ -122,6 +125,7 @@ public class NetPlayer : NetworkBehaviour
         GivenId = givenId;
     }
     
+    #endregion
     
     //进入正式游戏场景，Server调用
     private void OnGameSceneLoaded(ulong clientid, string scenename, LoadSceneMode loadscenemode)

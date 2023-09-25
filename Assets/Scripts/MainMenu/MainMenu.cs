@@ -66,7 +66,7 @@ public class MainMenu : MonoBehaviour
 
     private void OnServerFound(IPEndPoint arg0, DiscoveryResponseData arg1)
     {
-        Debug.Log($"Found Server: {arg0.Address}");
+        Debug.Log($"Found Server: {arg0.Address}: {arg1.Port}");
         discoveredServers.Add(arg0,arg1);
         AddRoom(arg0.Address,arg0.Port,arg1);
     }
@@ -184,7 +184,7 @@ public class MainMenu : MonoBehaviour
 
         bg.GetComponent<Button>().onClick.AddListener((() =>
         {
-            RoomClick(ip,port,data);
+            RoomClick(ip,data.Port,data);
         }));
         nameField.text = dataServerName;
         ipField.text = ip;
@@ -193,6 +193,12 @@ public class MainMenu : MonoBehaviour
         lock_.SetActive(false);
             
         roomsList.Add(room);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ServerConfirmServerRpc()
+    {
+        
     }
 
     public void RoomClick(string ip,int port,DiscoveryResponseData data)
@@ -217,6 +223,7 @@ public class MainMenu : MonoBehaviour
         GameManager.Instance.CurrentGameState = GameState.Lobby;
         if (NetworkManager.Singleton.StartClient())
         {
+            
             GotoLobby();
         }
         

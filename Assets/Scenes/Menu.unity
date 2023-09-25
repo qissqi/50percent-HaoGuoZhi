@@ -3036,7 +3036,7 @@ MonoBehaviour:
   ConnectionData:
     Address: 127.0.0.1
     Port: 7777
-    ServerListenAddress: 127.0.0.1
+    ServerListenAddress: 0.0.0.0
   DebugSimulator:
     PacketDelayMS: 0
     PacketJitterMS: 0
@@ -3105,7 +3105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e41f5ac27cd5d94290b437bd63e3e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Port: 47777
+  m_Port: 47977
   m_UniqueApplicationId: 3980450568896385695
   m_StartWithServer: 1
   ServerName: EnterName

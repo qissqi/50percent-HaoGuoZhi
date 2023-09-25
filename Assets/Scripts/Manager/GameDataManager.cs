@@ -6,25 +6,32 @@ using DG.Tweening;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
-[Serializable]
-struct PlayerGameData
+public struct PlayerData
 {
-    public int playerCount;
-    public int[] HP;
-    public bool[] playerMoveContrary;
+    public int HP;
+    public bool IsMoveContrary;
+    public Route RouteAt;
+    public bool IsDead;
+    public bool Action_Move;
+    public bool Action_Card;
     
+}
+
+public class PlayerGameData
+{
+    public PlayerData[] players;
+    public int playerCount;
     public int currentControlPlayer;
     public int playerPhase;
-    public Route[] PlayerAt;
+    public int leftSteps;
 
     public PlayerGameData(int n)
     {
         playerCount = n;
-        HP = new int[n];
-        playerMoveContrary = new bool[n];
-        PlayerAt = new Route[n];
-
+        players = new PlayerData[n];
+        
         currentControlPlayer = 0;
         playerPhase = 0;
     }
@@ -66,10 +73,13 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
             InitPLayersData();
             
             //测试用
-            if (IsServer)
-            {
-                Test(0);
-            }
+            // if (IsServer)
+            // {
+            //     Test(0);
+            // }
+            TurnSetToServerRpc(0);
+            
+            
         }
     }
     
@@ -79,9 +89,11 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
         GameObject obj = characters[id];
         while (true)
         {
-            Route next = gameData.PlayerAt[id].Next[0];
+            // Route next = gameData.PlayerAt[id].Next[0];
+            Route next = gameData.players[id].RouteAt.Next[0];
             await obj.transform.DOMove(next.transform.position+standOffset, 0.7f);
-            gameData.PlayerAt[id] = next;
+            // gameData.PlayerAt[id] = next;
+            gameData.players[id].RouteAt = next;
             await UniTask.Delay(TimeSpan.FromSeconds(0.1));
         }
         
@@ -108,22 +120,141 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
     //仅server调用
     private void InitPLayersData()
     {
-        Array.Fill(gameData.HP,20);
+        //Array.Fill(gameData.HP,20);
         for (int i = 0; i < gameData.playerCount; i++)
         {
+            gameData.players[i].HP = 20;
             int cid = GameManager.Instance.playersInfo.netId[i];
             var p = Instantiate(CharacterPrefab).GetComponent<NetworkObject>();
             p.SpawnWithOwnership((ulong)cid,false);
             p.DontDestroyWithOwner = true;
             p.transform.position = startPoints[i].transform.position+standOffset;
-            gameData.PlayerAt[i] = startPoints[i];
+            //gameData.PlayerAt[i] = startPoints[i];
+            gameData.players[i].RouteAt = startPoints[i];
+            gameData.players[i].IsMoveContrary = false;
+            gameData.players[i].IsDead = false;
+            gameData.players[i].Action_Move = false;
+            gameData.players[i].Action_Card = false;
             characters[i] = p.gameObject;
             
+            startPoints[i].Standings.Add(i);
             int character = GameManager.Instance.playersInfo.ChosenCharacter[i];
             p.GetComponent<SpriteRenderer>().sprite =
                 GameManager.Instance.GameCharacterSpriteList.characters[character];
         }
     }
+    
+    //仅Server调用
+    [ServerRpc]
+    private void TurnSetToServerRpc(int _id)
+    {
+        int current = _id % gameData.playerCount;
+        gameData.currentControlPlayer = current;
+        var currentplayer = gameData.players[current];
+        if (currentplayer.IsDead)
+        {
+            
+        }
+        else
+        {
+            currentplayer.Action_Card = true;
+            currentplayer.Action_Move = true;
+        }
+        
+        TurnSetToClientRpc(current,currentplayer.IsDead);
+
+    }
+
+    [ClientRpc]
+    private void TurnSetToClientRpc(int id,bool dead)
+    {
+        if (id == NetPlayer.OwnerInstance.GivenId)
+        {
+            Debug.Log("It's your turn:"+id);
+        }
+        else
+        {
+            
+        }
+    }
+
+    
+    [ServerRpc(RequireOwnership = false)]
+    public void RollDice_Move_ServerRpc(int id)
+    {
+        if (gameData.currentControlPlayer != id)
+        {
+            Debug.LogWarning("Nor Your Turn!");
+            return;
+        }
+
+        int value = Random.Range(0, 7);
+        gameData.leftSteps = value;
+        RollDice_Move_ClientRpc(id);
+        Debug.Log("Roll: "+value);
+        //CharacterMoveServerRpc(value);
+        
+    }
+
+    [ClientRpc]
+    private void RollDice_Move_ClientRpc(int id)
+    {
+        //动画表现
+
+        if (id == NetPlayer.OwnerInstance.GivenId)
+        {
+            CharacterMoveServerRpc();
+        }
+    }
+    
+    
+    //会使用存储在GameData类内的leftSteps
+    //将会计算到所有特殊路径（需要选择的路径）
+    [ServerRpc(RequireOwnership = false)]
+    private void CharacterMoveServerRpc()
+    {
+        Route route = gameData.players[gameData.currentControlPlayer].RouteAt;
+        //按步数遍历格子标记(最后一格停下，所以不用检查)
+        //也许需要NetworkVariable<>同步变量?
+        List<Route> endRoutes = new List<Route>();
+        CheckRoute(route,gameData.leftSteps,endRoutes);
+        
+    }
+
+    
+    //[ServerRpc(RequireOwnership = false)]
+    private void CheckRoute(Route route,int count,List<Route> endRoutes)
+    {
+        route.State = RouteState.None;
+        if (count == 0)
+        {
+            //endRoutes.Add(route);
+            route.State |= RouteState.EndWay;
+            return;
+        }
+        
+        //其他检查
+        //分支路
+        if (route.Next.Count > 1)
+        {
+            route.State |= RouteState.MultiWay;
+        }
+        
+        int c = count - 1;
+        foreach (var r in route.Next)
+        {
+            CheckRoute(r,c,endRoutes);
+        }
+    }
+
+    [ClientRpc]
+    private void CharacterMoveClientRpc(int step)
+    {
+        
+    }
+    
+    
+    
     
     
     

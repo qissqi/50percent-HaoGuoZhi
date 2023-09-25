@@ -8,7 +8,9 @@ public class Route : MonoBehaviour
 {
     public RouteType Route_Type;
     public List<Route> Next, Previous;
+    public List<int> Standings;
     public bool IsStartPoint;
+    public RouteState State;
     
     private void Start()
     {

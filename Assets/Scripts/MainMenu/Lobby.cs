@@ -163,7 +163,7 @@ public class Lobby : NetworkBehaviour
         Debug.Log("despawn");
         NetworkManager.Singleton.OnClientDisconnectCallback -= OnPlayerDisconnect;
         NetworkManager.Singleton.OnClientDisconnectCallback -= OnHolderDisconnect;
-        
+        NetworkManager.Singleton.GetComponent<ExampleNetworkDiscovery>().StopDiscovery();
     }
 
     private void OnDisable()
@@ -285,7 +285,6 @@ public class Lobby : NetworkBehaviour
         }
         LobbyPanel.gameObject.SetActive(false);
         NetworkManager.Singleton.Shutdown();
-        
     }
     
     //其他玩家离开大厅刷新,仅由Server调用

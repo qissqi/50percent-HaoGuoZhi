@@ -17,4 +17,13 @@ public enum RouteType
     A,B,C,D
 }
 
+[System.Flags]
+public enum RouteState
+{
+    None=0,
+    EndWay=1<<0,
+    PlayerToAttack=1<<1,
+    MultiWay=1<<2
+}
+
 
