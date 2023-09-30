@@ -26,6 +26,13 @@ public class GameManager : Singleton<GameManager>
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCall;
         NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnectedCall;
         
+        Debug.Log(NetworkManager.Singleton.NetworkConfig.EnableSceneManagement);
+        NetworkManager.Singleton.NetworkConfig.EnableSceneManagement = false;
+    }
+
+    public void ClearData()
+    {
+        
     }
 
     private void OnClientDisconnectedCall(ulong obj)
@@ -38,7 +45,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log($"Client Join : {obj}");
     }
 
-    public void CreatePlayerInfo()
+    public void InitPlayerInfo()
     {
         playersInfo = new AllPlayersInfo(4);
     }

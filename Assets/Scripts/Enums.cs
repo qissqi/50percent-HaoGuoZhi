@@ -26,4 +26,9 @@ public enum RouteState
     MultiWay=1<<2
 }
 
+public struct ApprovalDeclinedReason
+{
+    public const string NEEDPASSWORD = "Need Password";
+    public const string WRONGPASSWORD = "Wrong Password";
+}
 

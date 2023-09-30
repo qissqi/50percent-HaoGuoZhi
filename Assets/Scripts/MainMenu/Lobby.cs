@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using Unity.Collections;
 using Unity.Netcode;
@@ -12,47 +14,65 @@ using UnityEngine.SceneManagement;
 public class Lobby : NetworkBehaviour
 {
     public static Lobby Instance;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
+    
 
     [Header("引用")] 
     public Transform allPlayerInfo;
     public Transform selects;
     public Transform LobbyPanel;
     public Button ReadyButton;
+    public Button LeaveButton;
+    public List<Button> CharactersButton = new List<Button>();
 
     [Header("数据")] 
     public bool Choosed=false;
 
-    //测试用
-    private void Update()
+    private void Awake()
     {
-        return;
-        if(!IsSpawned)
-            return;
+        Instance = this;
+    }
 
-        ServerRpcParams rpcParams = new ServerRpcParams()
+    private void Start()
+    {
+        ReadyButton.onClick.AddListener(ReadyButtonClick);
+        LeaveButton.onClick.AddListener(LeaveLobbyClick);
+        for (int i = 0; i < CharactersButton.Count; i++)
         {
-            Receive = new ServerRpcReceiveParams()
+            int index = i;
+            CharactersButton[i].onClick.AddListener(() =>
             {
-                SenderClientId = NetPlayer.OwnerInstance.OwnerClientId
-            }
-        };
-        
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            TestServerRpc(KeyCode.J, rpcParams);
+                ChooseCharacterClick(index);
+            });
         }
-        if (Input.GetKeyDown(KeyCode.K))
+
+        if (NetworkManager.Singleton.IsServer)
         {
-            TestServerRpc(KeyCode.K, rpcParams);
+            GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
         }
-        if (Input.GetKeyDown(KeyCode.L))
+    }
+
+    private void OnEnable()
+    {
+        InitLobby(-1,false);
+    }
+
+    private void OnDisable()
+    {
+        if (NetworkManager.Singleton)
         {
-            TestServerRpc(KeyCode.L, rpcParams);
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnPlayerDisconnect;
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnHolderDisconnect;
+        }
+    }
+
+    public override void OnDestroy()
+    {
+        Instance = null;
+        LeaveButton.onClick.RemoveAllListeners();
+        ReadyButton.onClick.RemoveAllListeners();
+        foreach (var btn in CharactersButton)
+        {
+            btn.onClick.RemoveAllListeners();
         }
     }
 
@@ -76,6 +96,7 @@ public class Lobby : NetworkBehaviour
         }
     }
 
+    //根据当前玩家标识重置大厅内容
     public void InitLobby(int id,bool server)
     {
         //重置角色选择
@@ -105,9 +126,14 @@ public class Lobby : NetworkBehaviour
         {
             ReadyButton.transform.GetChild(0).GetComponent<TMP_Text>().text = "开始";
         }
+        else
+        {
+            ReadyButton.transform.GetChild(0).GetComponent<TMP_Text>().text = "准备";
+        }
     }
     
-    public void RefreshPlayerInLobby(int id,string _name,int character,bool ready)
+    //刷新玩家卡
+    public void UpdatePlayerInLobby(int id,string _name,int character,bool ready)
     {
         allPlayerInfo.GetChild(id).GetChild(0).GetComponent<TMP_Text>().text = _name;
         if (character != -1)
@@ -124,6 +150,7 @@ public class Lobby : NetworkBehaviour
         
     }
 
+    //刷新角色选择区
     private void RefreshCharacterSelect(int index, bool canChoose)
     {
         if(index<0)
@@ -133,87 +160,16 @@ public class Lobby : NetworkBehaviour
         selects.GetChild(index).GetComponent<Button>().interactable = canChoose;
     }
     
-    [ClientRpc]
-    private void RefreshPlayerInLobbyClientRpc(int id,string _name,int character,bool ready)
-    {
-        RefreshPlayerInLobby(id, _name, character,ready);
-    }
-
-    [ClientRpc]
-    private void RefreshCharacterSelectClientRpc(int index, bool canChoose)
-    {
-        RefreshCharacterSelect(index,canChoose);
-    }
-
-    public override void OnNetworkSpawn()
-    {
-        if (IsServer)
-        {
-            NetworkManager.Singleton.OnClientDisconnectCallback += OnPlayerDisconnect;
-        }
-        else
-        {
-            NetworkManager.Singleton.OnClientDisconnectCallback += OnHolderDisconnect;
-        }
-        
-        LobbySpawnLoaServerRpc();
-    }
-    public override void OnNetworkDespawn()
-    {
-        Debug.Log("despawn");
-        NetworkManager.Singleton.OnClientDisconnectCallback -= OnPlayerDisconnect;
-        NetworkManager.Singleton.OnClientDisconnectCallback -= OnHolderDisconnect;
-        NetworkManager.Singleton.GetComponent<ExampleNetworkDiscovery>().StopDiscovery();
-    }
-
-    private void OnDisable()
-    {
-        NetworkManager.Singleton.OnClientDisconnectCallback -= OnPlayerDisconnect;
-        NetworkManager.Singleton.OnClientDisconnectCallback -= OnHolderDisconnect;
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void LobbySpawnLoaServerRpc()
-    {
-        //重置角色选择
-        for (int i = 0; i < 6; i++)
-        {
-            selects.GetChild(i).GetComponent<Image>().color=Color.white;
-            selects.GetChild(i).GetComponent<Button>().interactable = true;
-        }
-
-        for (int i = 0; i < GameManager.Instance.playersInfo.playerCount; i++)
-        {
-            RefreshCharacterSelectClientRpc(
-                GameManager.Instance.playersInfo.ChosenCharacter[i],false);
-        }
-        
-    }
-    
-
     public void ChooseCharacterClick(int index)
     {
         Debug.Log("Choose "+index);
         int playerId = NetPlayer.OwnerInstance.GivenId;
         
-        ChooseCharacterServerRpc(playerId,index);
+        
+        this.ChooseCharacterServerRpc(playerId,index);
         Choosed = true;
     }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void ChooseCharacterServerRpc(int id,int character)
-    {
-        int lastChooseCharacter = GameManager.Instance.playersInfo.ChosenCharacter[id];
-        GameManager.Instance.playersInfo.ChosenCharacter[id] = character; 
-        RefreshPlayerInLobbyClientRpc(id,
-            GameManager.Instance.playersInfo.PlayerNames[id],character,false);
-
-        RefreshCharacterSelectClientRpc(lastChooseCharacter, true);
-        RefreshCharacterSelectClientRpc(character,false);
-
-    }
-
-
+    
     public void ReadyButtonClick()
     {
         //服务端：开始
@@ -253,8 +209,104 @@ public class Lobby : NetworkBehaviour
             ReadyButton.image.color = Color.gray;
         }
         
+    }
+    
+    public void LeaveLobbyClick()
+    {
+        
+        GameManager.Instance.InitPlayerInfo();
+        //LobbyPanel.gameObject.SetActive(false);
+        NetworkManager.Singleton.Shutdown();
+        UnloadLobby();
+    }
+
+    private async UniTaskVoid UnloadLobby()
+    {
+        AsyncOperation operation = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        while (!operation.isDone)
+        {
+            if (operation.progress >= 0.9f)
+            {
+                operation.allowSceneActivation = true;
+                break;
+            }
+
+            await UniTask.NextFrame();
+        }
+
+        //SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
+    }
+
+    [ClientRpc]
+    private void UpdatePlayerInLobbyClientRpc(int id,string _name,int character,bool ready)
+    {
+        UpdatePlayerInLobby(id, _name, character,ready);
+    }
+
+    [ClientRpc]
+    private void RefreshCharacterSelectClientRpc(int index, bool canChoose)
+    {
+        RefreshCharacterSelect(index,canChoose);
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnPlayerDisconnect;
+        }
+        else
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnHolderDisconnect;
+        }
+        
+        LobbySpawnLoaServerRpc();
+    }
+    
+    public override void OnNetworkDespawn()
+    {
+        Debug.Log("despawn");
+        NetworkManager.Singleton.OnClientDisconnectCallback -= OnPlayerDisconnect;
+        NetworkManager.Singleton.OnClientDisconnectCallback -= OnHolderDisconnect;
+        NetworkManager.Singleton.GetComponent<ExampleNetworkDiscovery>().StopDiscovery();
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void LobbySpawnLoaServerRpc()
+    {
+        Debug.Log("Lobby spawn");
+        //重置角色选择
+        for (int i = 0; i < 6; i++)
+        {
+            selects.GetChild(i).GetComponent<Image>().color=Color.white;
+            selects.GetChild(i).GetComponent<Button>().interactable = true;
+        }
+
+        for (int i = 0; i < GameManager.Instance.playersInfo.playerCount; i++)
+        {
+            RefreshCharacterSelectClientRpc(
+                GameManager.Instance.playersInfo.ChosenCharacter[i],false);
+        }
         
     }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ChooseCharacterServerRpc(int id,int character,ServerRpcParams serverRpcParams = default)
+    {
+        Debug.Log("Server: Choose-"+character);
+        int lastChooseCharacter = GameManager.Instance.playersInfo.ChosenCharacter[id];
+        GameManager.Instance.playersInfo.ChosenCharacter[id] = character; 
+        UpdatePlayerInLobbyClientRpc(id,
+            GameManager.Instance.playersInfo.PlayerNames[id],character,false);
+
+        RefreshCharacterSelectClientRpc(lastChooseCharacter, true);
+        RefreshCharacterSelectClientRpc(character,false);
+
+    }
+    
 
     [ServerRpc(RequireOwnership = false)]
     private void ReadyServerRpc(int id)
@@ -275,18 +327,7 @@ public class Lobby : NetworkBehaviour
         GameManager.Instance.CurrentGameState = GameState.Playing;
         Debug.Log("YS，启动！");
     }
-    
-    
-    public void LeaveLobbyClick()
-    {
-        if (IsServer)
-        {
-            GameManager.Instance.CreatePlayerInfo();
-        }
-        LobbyPanel.gameObject.SetActive(false);
-        NetworkManager.Singleton.Shutdown();
-    }
-    
+
     //其他玩家离开大厅刷新,仅由Server调用
     private void OnPlayerDisconnect(ulong netId)
     {
@@ -299,7 +340,7 @@ public class Lobby : NetworkBehaviour
         GameManager.Instance.RemovePlayerByNetId((int)netId);
         for (int i = 0; i < GameManager.Instance.playersInfo.max; i++)
         {
-            RefreshPlayerInLobbyClientRpc(i,
+            UpdatePlayerInLobbyClientRpc(i,
                 GameManager.Instance.playersInfo.PlayerNames[i],
                 GameManager.Instance.playersInfo.ChosenCharacter[i],false);
         }
@@ -314,6 +355,7 @@ public class Lobby : NetworkBehaviour
         }
     }
 
+    //房主离开游戏
     private void OnHolderDisconnect(ulong cid)
     {
         if (cid == 0)

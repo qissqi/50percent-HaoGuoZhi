@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LobbyController
       objectReference: {fileID: 0}
+    - target: {fileID: 4467899284337834125, guid: fad368aa607b5c14baeefa01097f3353, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5600943341435851620, guid: fad368aa607b5c14baeefa01097f3353, type: 3}
       propertyPath: selects
       value: 
@@ -414,19 +418,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 61770684}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2080934684}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &61770684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1734,6 +1726,52 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &229139732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 229139734}
+  - component: {fileID: 229139733}
+  m_Layer: 0
+  m_Name: LobbyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &229139733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229139732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e02610ace48245d43807791b7091946e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RoomPassword: 
+  NeedPwd: 0
+--- !u!4 &229139734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229139732}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &246856005
 GameObject:
   m_ObjectHideFlags: 0
@@ -3062,7 +3100,7 @@ MonoBehaviour:
       - {fileID: 11400000, guid: d70c501f1e3ad4846987e2c41fdaf9df, type: 2}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
-    ConnectionApproval: 0
+    ConnectionApproval: 1
     ConnectionData: 
     EnableTimeResync: 0
     TimeResyncInterval: 30
@@ -3109,7 +3147,7 @@ MonoBehaviour:
   m_UniqueApplicationId: 3980450568896385695
   m_StartWithServer: 1
   ServerName: EnterName
-  Password: 
+  NeedPassword: 0
   OnServerFound:
     m_PersistentCalls:
       m_Calls:
@@ -4086,19 +4124,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 649129392}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1274399177}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: JoinConfirmClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &649129392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5587,19 +5613,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1274399177}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: Toggle_SetPassword
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 0
 --- !u!1 &970129182
 GameObject:
@@ -6762,19 +6776,23 @@ MonoBehaviour:
   startPanel: {fileID: 615613352}
   roomSlotPrefab: {fileID: 3415161988481105306, guid: 5ab009913e4e4a54b925cc082be6627a, type: 3}
   lobbyPanel: {fileID: 8455616847057674620}
+  inputPassword: 
   playerNameField: {fileID: 1555398352}
   roomContent: {fileID: 246856006}
   currentSelectedIp: 
   currenSelectedPort: 0
-  currentSelectedPsw: 
+  currentSelectedNeedPsw: 0
   createRoomPanel: {fileID: 1331357234}
-  psw_toggle: {fileID: 946372815}
+  create_psw_toggle: {fileID: 946372815}
   create_RoomNameField: {fileID: 1845127310}
   create_RoomPswField: {fileID: 1758495218}
+  create_Confirm: {fileID: 1230180275}
+  create_Cancel: {fileID: 183308105}
   joinRoomPanel: {fileID: 2080934684}
   join_RoomIpField: {fileID: 1481278417}
   join_RoomPortField: {fileID: 895927673}
-  join_ConfirmButton: {fileID: 0}
+  join_Confirm: {fileID: 649129391}
+  join_Cancel: {fileID: 61770683}
 --- !u!114 &1274399178
 MonoBehaviour:
   m_ObjectHideFlags: 0

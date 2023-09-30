@@ -2,10 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System.Text;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using TMPro;
+using Unity.Collections;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -18,7 +23,15 @@ public class MainMenu : MonoBehaviour
     private List<GameObject> roomsList=new List<GameObject>();
     //[SerializeField] private Lobby lobbyController;
     [SerializeField] private GameObject lobbyPanel;
+    private bool loadLobbyCoroutine;
+
+    [Header("状态")]
+    private bool canLoadLobby;
+    private bool loadingLobby;
+    private CancellationTokenSource clientConnectToken;
     
+    [Header("加入房间")]
+    [SerializeField] private string inputPassword ="";
 
     [Header("主菜单")] 
     [SerializeField] private TMP_InputField playerNameField;
@@ -26,19 +39,23 @@ public class MainMenu : MonoBehaviour
     //[SerializeField] private GameObject currentSelectedRoom;
     [SerializeField] private string currentSelectedIp;
     [SerializeField] private int currenSelectedPort; 
-    [SerializeField] private string currentSelectedPsw;
+    //[SerializeField] private string currentSelectedPsw;
+    [SerializeField] private bool currentSelectedNeedPsw;
     
     [Header("创建房间界面")]
     [SerializeField] private GameObject createRoomPanel;
-    [SerializeField] private Toggle psw_toggle;
+    [SerializeField] private Toggle create_psw_toggle;
     [SerializeField] private TMP_InputField create_RoomNameField;
     [SerializeField] private TMP_InputField create_RoomPswField;
+    [SerializeField] private Button create_Confirm;
+    [SerializeField] private Button create_Cancel;
 
     [Header("手动加入房间")] 
     [SerializeField] private GameObject joinRoomPanel;
     [SerializeField] private TMP_InputField join_RoomIpField;
     [SerializeField] private TMP_InputField join_RoomPortField;
-    [SerializeField] private Button join_ConfirmButton;
+    [SerializeField] private Button join_Confirm;
+    [SerializeField] private Button join_Cancel;
     
 
     void Update()
@@ -53,16 +70,39 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        canLoadLobby = false;
         playerNameField.text = GameManager.Instance.playerName;
         networkDiscovery = NetworkManager.Singleton.GetComponent<ExampleNetworkDiscovery>();
         networkDiscovery.OnServerFound.RemoveListener(OnServerFound);
         networkDiscovery.OnServerFound.AddListener(OnServerFound);
         
-        GameManager.Instance.CreatePlayerInfo();
+        GameManager.Instance.InitPlayerInfo();
         networkDiscovery.StartClient();
         networkDiscovery.ClientBroadcast(new DiscoveryBroadcastData());
+
+        //交互层注册
+        create_psw_toggle.onValueChanged.AddListener(Toggle_SetPassword);
+        create_Confirm.onClick.AddListener(OnCreateRoomConfirmClick);
+        create_Cancel.onClick.AddListener(OnCreateRoomCancelClick);
+        join_Confirm.onClick.AddListener(JoinConfirmClick);
+        join_Cancel.onClick.AddListener(JoinCancelClick);
+        
     }
 
+    private void OnEnable()
+    {
+        NetworkManager.Singleton.OnClientDisconnectCallback += ClientConnectFailCallback;
+        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+    }
+
+    private void OnDisable()
+    {
+        if (NetworkManager.Singleton)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback -= ClientConnectFailCallback;
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+        }
+    }
 
     private void OnServerFound(IPEndPoint arg0, DiscoveryResponseData arg1)
     {
@@ -71,6 +111,7 @@ public class MainMenu : MonoBehaviour
         AddRoom(arg0.Address,arg0.Port,arg1);
     }
 
+    // 编辑名字的检测
     public void EditNameEnd()
     {
         if (string.IsNullOrEmpty(playerNameField.text))
@@ -89,11 +130,11 @@ public class MainMenu : MonoBehaviour
         create_RoomPswField.GetComponent<Image>().color=Color.gray;
         create_RoomPswField.readOnly = true;
         create_RoomNameField.text = GameManager.Instance.playerName;
-        psw_toggle.isOn = false;
+        create_psw_toggle.isOn = false;
         createRoomPanel.SetActive(true);
     }
     
-    //主机创建房间
+    // 主机创建房间确认按钮
     public void OnCreateRoomConfirmClick()
     {
         if (string.IsNullOrEmpty(create_RoomNameField.text))
@@ -102,33 +143,44 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
-        if (psw_toggle.isOn && string.IsNullOrEmpty(create_RoomPswField.text))
+        if (create_psw_toggle.isOn && string.IsNullOrEmpty(create_RoomPswField.text))
         {
             Debug.Log("Room password empty");
             return;
         }
-        
+
         GameManager.Instance.CurrentGameState = GameState.Lobby;
         //TODO:启动Server，配置信息，进入大厅
 
         createRoomPanel.SetActive(false);
         networkDiscovery.ServerName = create_RoomNameField.text;
-        networkDiscovery.Password = create_RoomPswField.text;
+        if (create_psw_toggle.isOn)
+        {
+            networkDiscovery.NeedPassword = true;
+            LobbyManager.Instance.RoomPassword = create_RoomPswField.text;
+            LobbyManager.Instance.NeedPwd = true;
+        }
+        else
+        {
+            networkDiscovery.NeedPassword = false;
+            LobbyManager.Instance.NeedPwd = false;
+        }
+        //networkDiscovery.Password = create_RoomPswField.text;
+        //networkDiscovery.NeedPassword = create_psw_toggle.isOn;
         networkDiscovery.StartServer();
         
-        NetworkManager.Singleton.StartHost();
         Debug.Log("启动！");
-        
+
         //lobbyPanel.SetActive(true);
-        GotoLobby();
-        
+        TryGotoLobby(true);
+
+
     }
 
     public void OnCreateRoomCancelClick()
     {
         createRoomPanel.SetActive(false);
     }
-    
 
     public void JoinClick()
     {
@@ -148,7 +200,11 @@ public class MainMenu : MonoBehaviour
         
     }
 
-
+    private void JoinCancelClick()
+    {
+        joinRoomPanel.SetActive(false);
+    }
+    
     public void RefreshClick()
     {
         NetworkShutDown();
@@ -205,8 +261,22 @@ public class MainMenu : MonoBehaviour
     {
         currentSelectedIp = ip;
         currenSelectedPort = port;
-        currentSelectedPsw = data.Password;
-        JoinRoom(ip,port);
+        //currentSelectedPsw = data.Password;
+        currentSelectedNeedPsw = data.NeedPassword;
+        JoinRoom(currentSelectedIp,currenSelectedPort);
+    }
+    
+    //房间需要输入密码，打开输入密码的面板
+    private void OpenPasswordPanel()
+    {
+        
+    }
+    
+    //输入完密码确认
+    private void InputPasswordConfirmClick()
+    {
+
+        //TODO NetworkManager.Singleton.NetworkConfig.ConnectionData
     }
 
     public void NetworkShutDown()
@@ -221,26 +291,14 @@ public class MainMenu : MonoBehaviour
         NetworkManager.Singleton.GetComponent<UnityTransport>().ConnectionData.Port = (ushort)port;
         
         GameManager.Instance.CurrentGameState = GameState.Lobby;
-        if (NetworkManager.Singleton.StartClient())
-        {
-            
-            GotoLobby();
-        }
         
+        TryGotoLobby(false);
         
     }
 
-    public void GotoLobby(bool isWatcher =false)
+    public void Toggle_SetPassword(bool toggle)
     {
-        //lobbyController.gameObject.SetActive(true);
-        lobbyPanel.SetActive(true);
-    }
-    
-    
-    
-    public void Toggle_SetPassword()
-    {
-        if (psw_toggle.isOn)
+        if (toggle)
         {
             create_RoomPswField.readOnly = false;
             create_RoomPswField.GetComponent<Image>().color=Color.white;
@@ -253,5 +311,104 @@ public class MainMenu : MonoBehaviour
             create_RoomPswField.readOnly = true;
         }
     }
+
+    public void TryGotoLobby(bool isServer)
+    {
+        canLoadLobby = false;
+        loadingLobby = true;
+        if (loadLobbyCoroutine == false)
+        {
+            //loadLobbyCoroutine = StartCoroutine(LoadLobbyScene());
+            loadLobbyCoroutine = true;
+            LoadLobbyScene().Forget();
+        }
+        if (isServer)
+        {
+            if (NetworkManager.Singleton.StartHost())
+            {
+                GotoLobby().Forget();
+            }
+        }
+        //非房主，两步走：尝试加入+密码验证
+        else
+        {
+            if (NetworkManager.Singleton.StartClient())
+            {
+                clientConnectToken?.Cancel();
+                clientConnectToken?.Dispose();
+                clientConnectToken = new CancellationTokenSource();
+                // WaitForConnectSuccess(clientConnectToken.Token).Forget();
+            }
+        }
+    }
+
+    private void OnClientConnected(ulong obj)
+    {
+        GotoLobby().Forget();
+    }
+
+    //客户端等待连接成功
+    private async UniTaskVoid WaitForConnectSuccess(CancellationToken token)
+    {
+        while (!NetworkManager.Singleton.IsConnectedClient)
+        {
+            await UniTask.NextFrame(token);
+        }
+        GotoLobby().Forget();
+    }
+
+    //掉线或拒绝连接
+    private void ClientConnectFailCallback(ulong obj)
+    {
+        if (!NetworkManager.Singleton.IsServer)
+        {
+            string reason = NetworkManager.Singleton.DisconnectReason;
+            //连接被拒绝
+            if (!string.IsNullOrEmpty(reason))
+            {
+                Debug.Log("Connect fail:\n"+reason);
+                switch (reason)
+                {
+                    case ApprovalDeclinedReason.NEEDPASSWORD:
+                        OpenPasswordPanel();
+                        break;
+                    case ApprovalDeclinedReason.WRONGPASSWORD:
+                        OpenPasswordPanel();
+                        break;
+                }
+            }
+        }
+    }
+
+    public async UniTaskVoid GotoLobby()
+    {
+        await UniTask.NextFrame();
+        canLoadLobby = true;
+    }
+
+    private async UniTaskVoid LoadLobbyScene()
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync("Lobby",LoadSceneMode.Additive);  //协程操作变量为operation
+        operation.allowSceneActivation = false; //加载完成时先不要自动跳转，允许也可以
+		
+        while(!operation.isDone)   //加载未完成，改变进度条
+        {
+            float progress = operation.progress / 0.9f;  //异步加载进程值为 0~0.9，需要除0.9 获得实际进度
+			
+            if(operation.progress>=0.9f && canLoadLobby)
+            {
+                operation.allowSceneActivation = true;
+                canLoadLobby = false;
+                break;
+            }
+            //yield return null; //协程别忘了
+            await UniTask.NextFrame();
+        }
+
+        await UniTask.NextFrame();
+        SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
+        loadingLobby = false;
+        loadLobbyCoroutine = false;
+    } 
     
 }

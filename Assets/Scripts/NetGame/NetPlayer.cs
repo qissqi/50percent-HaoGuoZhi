@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -51,6 +52,18 @@ public class NetPlayer : NetworkBehaviour
     
     public override void OnNetworkSpawn()
     {
+        WaitLobbyLoad().Forget();
+        //DontDestroyOnLoad(this);
+    }
+
+    public async UniTaskVoid WaitLobbyLoad()
+    {
+        while (!Lobby.Instance)
+        {
+            await UniTask.NextFrame();
+        }
+        await UniTask.NextFrame();
+        await UniTask.NextFrame();
         if (IsOwner)
         {
             if (GameManager.Instance.CurrentGameState == GameState.Lobby)
@@ -68,7 +81,6 @@ public class NetPlayer : NetworkBehaviour
             Debug.Log("Spawn at"+GameManager.Instance.CurrentGameState);
             
         }
-        //DontDestroyOnLoad(this);
     }
 
     #region 大厅登录
@@ -109,7 +121,7 @@ public class NetPlayer : NetworkBehaviour
         GameManager.Instance.playersInfo.playerCount = id + 1;
         GameManager.Instance.playersInfo.PlayerNames[id] = _name;
         GameManager.Instance.playersInfo.netId[id] = netId;
-        Lobby.Instance.RefreshPlayerInLobby(id,_name,character,ready);
+        Lobby.Instance.UpdatePlayerInLobby(id,_name,character,ready);
     }
 
     [ClientRpc]

@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5600943341435851620
 MonoBehaviour:
@@ -49,7 +49,15 @@ MonoBehaviour:
   selects: {fileID: 0}
   LobbyPanel: {fileID: 0}
   ReadyButton: {fileID: 0}
-  isReady: 0
+  LeaveButton: {fileID: 0}
+  CharactersButton:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Choosed: 0
 --- !u!114 &1040122208657277500
 MonoBehaviour:
   m_ObjectHideFlags: 0

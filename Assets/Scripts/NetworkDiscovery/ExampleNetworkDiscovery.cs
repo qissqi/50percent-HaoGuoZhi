@@ -20,7 +20,8 @@ public class ExampleNetworkDiscovery : NetworkDiscovery<DiscoveryBroadcastData, 
     bool m_StartWithServer = true;
 
     public string ServerName = "EnterName";
-    public string Password = "";
+    //public string Password = "";
+    public bool NeedPassword;
 
     public ServerFoundEvent OnServerFound;
     
@@ -50,13 +51,15 @@ public class ExampleNetworkDiscovery : NetworkDiscovery<DiscoveryBroadcastData, 
             }
         }
     }
-
+    
+    //服务端的检索回应
     protected override bool ProcessBroadcast(IPEndPoint sender, DiscoveryBroadcastData broadCast, out DiscoveryResponseData response)
     {
         response = new DiscoveryResponseData()
         {
             ServerName = this.ServerName,
-            Password = this.Password,
+            //Password = this.Password,
+            NeedPassword = this.NeedPassword,
             Port = ((UnityTransport) m_NetworkManager.NetworkConfig.NetworkTransport).ConnectionData.Port,
         };
         return true;
