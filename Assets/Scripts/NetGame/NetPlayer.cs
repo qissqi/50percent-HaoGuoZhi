@@ -14,51 +14,21 @@ public class NetPlayer : NetworkBehaviour
     public int GivenId;
     public int ChosenCharacter;
 
-    //测试用
-    private void Update()
+    private void Start()
     {
-        if(!GameDataManager.Instance)
-            return;
-        
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            TestSServerRpc(KeyCode.I);
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            TestSServerRpc(KeyCode.I);
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TestSServerRpc(KeyCode.I);
-        }
+        DontDestroyOnLoad(gameObject);
     }
 
-    [ServerRpc]
-    private void TestSServerRpc(KeyCode key)
-    {
-        switch (key)
-        {
-            case KeyCode.I:
-                break;
-            case KeyCode.O:
-                break;
-            case KeyCode.P:
-                break;
-        }
-    }
-    
     public override void OnNetworkSpawn()
     {
         WaitLobbyLoad().Forget();
+
         //DontDestroyOnLoad(this);
     }
 
     public async UniTaskVoid WaitLobbyLoad()
     {
-        while (!Lobby.Instance)
+        while (!LobbyManager.LobbyUI)
         {
             await UniTask.NextFrame();
         }
@@ -85,52 +55,34 @@ public class NetPlayer : NetworkBehaviour
 
     #region 大厅登录
     
-    [ServerRpc]
-    private void PlayerRegisterServerRpc(string name,int netId)
+    [ServerRpc]     //新玩家进入并注册，加载新玩家信息，新玩家加载其他已有信息
+    private void PlayerRegisterServerRpc(string _name,int netId)
     {
         ref AllPlayersInfo infos = ref GameManager.Instance.playersInfo;
-        infos.PlayerNames[infos.playerCount] = name;
+        infos.PlayerNames[infos.playerCount] = _name;
         infos.netId[infos.playerCount] = netId;
-        var count = infos.playerCount;
+        var tmp_id = infos.playerCount;
         
         SetGivenIdClientRpc(infos.playerCount,
             new ClientRpcParams(){Send = new ClientRpcSendParams()
         {
             TargetClientIds = new ulong[]{(ulong)netId}
         }});
-        InitLobbyClientRpc(infos.playerCount,new ClientRpcParams(){Send = new ClientRpcSendParams()
-        {
-            TargetClientIds = new ulong[]{(ulong)netId}
-        }});
+        PlayerRegisterClientRpc(tmp_id, _name, netId);
         
-        for (int i = 0; i < count+1; i++)
-        {
-            PlayerRegisterClientRpc(i,infos.PlayerNames[i],infos.netId[i],
-                infos.ChosenCharacter[i],infos.Ready[i]);
-            // GameManager.Instance.playersInfo.playerCount = i + 1;
-            // GameManager.Instance.playersInfo.PlayerNames[i] = infos.PlayerNames[i];
-            // GameManager.Instance.playersInfo.netId[i] = infos.netId[i];
-            // Lobby.Instance.RefreshPlayerInLobby(i,infos.PlayerNames[i],-1);
-        }
+        LobbyManager.Instance.NewPlayerRegisterLobby(netId,tmp_id,_name,infos.playerCount);
         
     }
     
-    [ClientRpc]
-    private void PlayerRegisterClientRpc(int id,string _name,int netId,int character,bool ready)
+    [ClientRpc]     //加载新玩家信息
+    private void PlayerRegisterClientRpc(int id,string _name,int netId)
     {
         GameManager.Instance.playersInfo.playerCount = id + 1;
         GameManager.Instance.playersInfo.PlayerNames[id] = _name;
         GameManager.Instance.playersInfo.netId[id] = netId;
-        Lobby.Instance.UpdatePlayerInLobby(id,_name,character,ready);
+        //LobbyManager.LobbyUI.ReloadLobbyState(id,_name,character,ready);
     }
 
-    [ClientRpc]
-    private void InitLobbyClientRpc(int id,ClientRpcParams rpcParams)
-    {
-        Lobby.Instance.InitLobby(id,IsServer);
-    }
-    
-    
     [ClientRpc]
     public void SetGivenIdClientRpc(int givenId,ClientRpcParams rpcParams)
     {

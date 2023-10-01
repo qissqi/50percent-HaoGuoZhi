@@ -30,11 +30,6 @@ public class GameManager : Singleton<GameManager>
         NetworkManager.Singleton.NetworkConfig.EnableSceneManagement = false;
     }
 
-    public void ClearData()
-    {
-        
-    }
-
     private void OnClientDisconnectedCall(ulong obj)
     {
         Debug.Log($"Client Disconnect : {obj}");
