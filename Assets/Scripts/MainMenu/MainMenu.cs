@@ -23,24 +23,23 @@ public class MainMenu : MonoBehaviour
     private List<GameObject> roomsList=new List<GameObject>();
     //[SerializeField] private Lobby lobbyController;
     [SerializeField] private GameObject lobbyPanel;
-    private bool loadLobbyCoroutine;
+    //private bool loadLobbyCoroutine;
 
-    [Header("状态")]
+    [Header("状态-弃用")]
     private bool canLoadLobby;
     private bool loadingLobby;
     private CancellationTokenSource clientConnectToken;
-    
-    [Header("加入房间")]
-    [SerializeField] private string inputPassword ="";
 
     [Header("主菜单")] 
+    [SerializeField] private Button manualJointButton;
+    [SerializeField] private Button createRoomButton;
+    [SerializeField] private Button refreshButton;
     [SerializeField] private TMP_InputField playerNameField;
     [SerializeField] private Transform roomContent;
-    //[SerializeField] private GameObject currentSelectedRoom;
-    [SerializeField] private string currentSelectedIp;
-    [SerializeField] private int currenSelectedPort; 
-    //[SerializeField] private string currentSelectedPsw;
+    [SerializeField] private string currentTargetIp;
+    [SerializeField] private int currentTargetPort; 
     [SerializeField] private bool currentSelectedNeedPsw;
+    [SerializeField] private GameObject loadingPanel;
     
     [Header("创建房间界面")]
     [SerializeField] private GameObject createRoomPanel;
@@ -56,7 +55,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private TMP_InputField join_RoomPortField;
     [SerializeField] private Button join_Confirm;
     [SerializeField] private Button join_Cancel;
-    
+
+    [Header("输入密码")] 
+    [SerializeField] private GameObject passwordPanel;
+    [SerializeField] private Button passwordConfirm;
+    [SerializeField] private Button passwordCancel;
+    [SerializeField] private TMP_InputField passwordArea;
+    [SerializeField] private string inputPassword ="";
 
     void Update()
     {
@@ -70,7 +75,6 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        canLoadLobby = false;
         playerNameField.text = GameManager.Instance.playerName;
         networkDiscovery = NetworkManager.Singleton.GetComponent<ExampleNetworkDiscovery>();
         networkDiscovery.OnServerFound.RemoveListener(OnServerFound);
@@ -82,10 +86,15 @@ public class MainMenu : MonoBehaviour
 
         //交互层注册
         create_psw_toggle.onValueChanged.AddListener(Toggle_SetPassword);
+        manualJointButton.onClick.AddListener(ManualJoinClick);
+        createRoomButton.onClick.AddListener(CreateClick);
+        refreshButton.onClick.AddListener(RefreshClick);
         create_Confirm.onClick.AddListener(OnCreateRoomConfirmClick);
         create_Cancel.onClick.AddListener(OnCreateRoomCancelClick);
-        join_Confirm.onClick.AddListener(JoinConfirmClick);
-        join_Cancel.onClick.AddListener(JoinCancelClick);
+        join_Confirm.onClick.AddListener(ManualJoinConfirmClick);
+        join_Cancel.onClick.AddListener(ManualJoinCancelClick);
+        passwordConfirm.onClick.AddListener(InputPasswordConfirmClick);
+        passwordCancel.onClick.AddListener(InputPasswordCancelClick);
         
     }
 
@@ -172,8 +181,8 @@ public class MainMenu : MonoBehaviour
         Debug.Log("启动！");
 
         //lobbyPanel.SetActive(true);
-        TryGotoLobby(true);
-
+        //TryGotoLobby(true);
+        NetworkManager.Singleton.StartHost();
 
     }
 
@@ -182,7 +191,7 @@ public class MainMenu : MonoBehaviour
         createRoomPanel.SetActive(false);
     }
 
-    public void JoinClick()
+    public void ManualJoinClick()
     {
         join_RoomIpField.text = "";
         join_RoomPortField.text = "";
@@ -190,17 +199,20 @@ public class MainMenu : MonoBehaviour
 
     }
 
-    public void JoinConfirmClick()
+    public void ManualJoinConfirmClick()
     {
         if(string.IsNullOrEmpty(join_RoomIpField.text) || string.IsNullOrEmpty(join_RoomPortField.text))
             return;
         
+        SetConnectionData(Array.Empty<byte>());
+        currentTargetIp = join_RoomIpField.text;
+        currentTargetPort = int.Parse(join_RoomPortField.text);
         JoinRoom(join_RoomIpField.text,int.Parse(join_RoomPortField.text));
         joinRoomPanel.SetActive(false);
         
     }
 
-    private void JoinCancelClick()
+    private void ManualJoinCancelClick()
     {
         joinRoomPanel.SetActive(false);
     }
@@ -246,37 +258,48 @@ public class MainMenu : MonoBehaviour
         ipField.text = ip;
             
         //判断房间加密？
-        lock_.SetActive(false);
+        lock_.SetActive(data.NeedPassword);
             
         roomsList.Add(room);
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void ServerConfirmServerRpc()
-    {
-        
-    }
-
     public void RoomClick(string ip,int port,DiscoveryResponseData data)
     {
-        currentSelectedIp = ip;
-        currenSelectedPort = port;
-        //currentSelectedPsw = data.Password;
+        currentTargetIp = ip;
+        currentTargetPort = port;
         currentSelectedNeedPsw = data.NeedPassword;
-        JoinRoom(currentSelectedIp,currenSelectedPort);
+        SetConnectionData(Array.Empty<byte>());
+        if (currentSelectedNeedPsw)
+        {
+            OpenPasswordPanel();
+        }
+        else
+        {
+            JoinRoom(currentTargetIp,currentTargetPort);
+        }
     }
     
     //房间需要输入密码，打开输入密码的面板
     private void OpenPasswordPanel()
     {
-        
+        passwordArea.text = "";
+        passwordPanel.SetActive(true);
     }
     
     //输入完密码确认
     private void InputPasswordConfirmClick()
     {
+        inputPassword = passwordArea.text;
+        byte[] psw;
+        psw = Encoding.UTF8.GetBytes(inputPassword);
+        SetConnectionData(psw);
+        passwordPanel.SetActive(false);
+        JoinRoom(currentTargetIp,currentTargetPort);
+    }
 
-        //TODO NetworkManager.Singleton.NetworkConfig.ConnectionData
+    private void InputPasswordCancelClick()
+    {
+        passwordPanel.SetActive(false);
     }
 
     public void NetworkShutDown()
@@ -284,6 +307,10 @@ public class MainMenu : MonoBehaviour
         NetworkManager.Singleton.Shutdown();
     }
     
+    private void SetConnectionData(byte[] data)
+    {
+        NetworkManager.Singleton.NetworkConfig.ConnectionData = data;
+    }
     
     public void JoinRoom(string IP,int port)
     {
@@ -291,9 +318,10 @@ public class MainMenu : MonoBehaviour
         NetworkManager.Singleton.GetComponent<UnityTransport>().ConnectionData.Port = (ushort)port;
         
         GameManager.Instance.CurrentGameState = GameState.Lobby;
+        loadingPanel.SetActive(true);
         
-        TryGotoLobby(false);
-        
+        //TryGotoLobby(false);
+        NetworkManager.Singleton.StartClient();
     }
 
     public void Toggle_SetPassword(bool toggle)
@@ -316,17 +344,19 @@ public class MainMenu : MonoBehaviour
     {
         canLoadLobby = false;
         loadingLobby = true;
-        if (loadLobbyCoroutine == false)
-        {
-            //loadLobbyCoroutine = StartCoroutine(LoadLobbyScene());
-            loadLobbyCoroutine = true;
-            LoadLobbyScene().Forget();
-        }
+        
         if (isServer)
         {
             if (NetworkManager.Singleton.StartHost())
             {
-                GotoLobby().Forget();
+                // if (loadLobbyCoroutine == false)
+                // {
+                //     //loadLobbyCoroutine = StartCoroutine(LoadLobbyScene());
+                //     loadLobbyCoroutine = true;
+                //     LoadLobbyScene().Forget();
+                // }
+
+                GotoLobby();
             }
         }
         //非房主，两步走：尝试加入+密码验证
@@ -342,24 +372,26 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    private void OnClientConnected(ulong obj)
+    //连接成功
+    private void OnClientConnected(ulong netId)
     {
-        GotoLobby().Forget();
-    }
-
-    //客户端等待连接成功
-    private async UniTaskVoid WaitForConnectSuccess(CancellationToken token)
-    {
-        while (!NetworkManager.Singleton.IsConnectedClient)
+        // if (loadLobbyCoroutine == false)
+        // {
+        //     //loadLobbyCoroutine = StartCoroutine(LoadLobbyScene());
+        //     loadLobbyCoroutine = true;
+        //     LoadLobbyScene().Forget();
+        // }
+        if (netId == 0)
         {
-            await UniTask.NextFrame(token);
+            loadingPanel.SetActive(false);
+            GotoLobby();
         }
-        GotoLobby().Forget();
     }
 
     //掉线或拒绝连接
     private void ClientConnectFailCallback(ulong obj)
     {
+        loadingPanel.SetActive(false);
         if (!NetworkManager.Singleton.IsServer)
         {
             string reason = NetworkManager.Singleton.DisconnectReason;
@@ -380,10 +412,9 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public async UniTaskVoid GotoLobby()
+    public void GotoLobby()
     {
-        await UniTask.NextFrame();
-        canLoadLobby = true;
+        SceneManager.LoadScene("Lobby", LoadSceneMode.Additive);
     }
 
     private async UniTaskVoid LoadLobbyScene()
@@ -408,7 +439,6 @@ public class MainMenu : MonoBehaviour
         await UniTask.NextFrame();
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
         loadingLobby = false;
-        loadLobbyCoroutine = false;
     } 
     
 }

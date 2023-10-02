@@ -252,7 +252,7 @@ public abstract class NetworkDiscovery<TBroadCast, TResponse> : MonoBehaviour
         {
             return false;
         }
-
+        
         return true;
     }
 }

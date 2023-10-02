@@ -114,7 +114,7 @@ public class LobbyManager : Singleton<LobbyManager>
             return;
         }
         string message = Encoding.UTF8.GetString(byteData);
-        Debug.Log($"{clientId}: {message}");
+        Debug.Log($"{clientId} try connect: {message}");
 
         if (NeedPwd)
         {
@@ -157,6 +157,7 @@ public class LobbyManager : Singleton<LobbyManager>
         if(id==-1)
             return;
         
+        Debug.Log($"player {id} disconnect");
         lobbyConnector.RefreshCharacterSelectClientRpc(GameManager.Instance.playersInfo.ChosenCharacter[id],true);
         lobbyConnector.CancelReadyServerRpc(id);
         
@@ -191,7 +192,7 @@ public class LobbyManager : Singleton<LobbyManager>
     
     private async UniTaskVoid UnloadLobby()
     {
-        AsyncOperation operation = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        AsyncOperation operation = SceneManager.UnloadSceneAsync("Lobby");
         while (!operation.isDone)
         {
             if (operation.progress >= 0.9f)
