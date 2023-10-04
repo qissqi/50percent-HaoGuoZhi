@@ -17,21 +17,6 @@ public class TransportString : INetworkSerializable
     {
         this.str = str ?? "";
     }
-    
-    // public override string ToString()
-    // {
-    //     return str;
-    // }
-    //
-    // public static implicit operator TransportString(string str)
-    // {
-    //     return new TransportString(str);
-    // }
-    //
-    // public static implicit operator string(TransportString str)
-    // {
-    //     return str.str;
-    // }
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     { 

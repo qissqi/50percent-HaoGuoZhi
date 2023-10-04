@@ -7,6 +7,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 //玩家的数据信息
 public struct PlayerData
@@ -50,7 +51,7 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
     private PlayerGameData gameData;
     
     public List<Route> startPoints;
-    private GameObject[] characters;
+    private NetworkObject[] characters;
 
     private Vector3 standOffset = new Vector3(0.3f, 0.3f);
     private GameViewController viewController = new GameViewController();
@@ -61,7 +62,7 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
         if (IsServer)
         {
             gameData = new PlayerGameData(GameManager.Instance.playersInfo.playerCount);
-            characters = new GameObject[gameData.playerCount];
+            characters = new NetworkObject[gameData.playerCount];
             GameManager.Instance.playersInfo.Ready[0] = true;
             NetworkManager.SceneManager.OnLoadComplete += OnPlayerLoad;
         }
@@ -75,7 +76,7 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
         Debug.Log($"Player {id} has loaded");
         if (CheckAllLoad())
         {
-            InitPLayersData();
+            InitPlayersData();
             AllPlayersInfo info = GameManager.Instance.playersInfo;
             TransportString[] transportStrings = new TransportString[info.max];
             for (int i = 0; i < info.max; i++)
@@ -84,6 +85,7 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
             }
             
             SyncPlayerDataClientRpc(info,transportStrings);
+            InitSceneDataClientRpc(characters.Select(n=>(NetworkObjectReference)n).ToArray());
             //测试用
             // if (IsServer)
             // {
@@ -94,11 +96,13 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
         }
     }
 
-    private void SyncPlayerData()
+    private void InitSceneDataClientRpc(NetworkObjectReference[] characters)
     {
-        
+        // p.GetComponent<SpriteRenderer>().sprite =
+        //     GameManager.Instance.GameCharacterSpriteList.characters[character];
     }
-    
+
+
     [ClientRpc]
     private void SyncPlayerDataClientRpc(AllPlayersInfo info,TransportString[] playerNames)
     {
@@ -117,7 +121,7 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
     //测试用
     private async UniTaskVoid Test(int id)
     {
-        GameObject obj = characters[id];
+        NetworkObject obj = characters[id];
         while (true)
         {
             // Route next = gameData.PlayerAt[id].Next[0];
@@ -149,7 +153,7 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
     }
 
     //仅server调用
-    private void InitPLayersData()
+    private void InitPlayersData()
     {
         //Array.Fill(gameData.HP,20);
         for (int i = 0; i < gameData.playerCount; i++)
@@ -166,7 +170,7 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
             gameData.players[i].IsDead = false;
             gameData.players[i].Action_Move = false;
             gameData.players[i].Action_Card = false;
-            characters[i] = p.gameObject;
+            characters[i] = p;
             
             startPoints[i].Standings.Add(i);
             int character = GameManager.Instance.playersInfo.ChosenCharacter[i];
