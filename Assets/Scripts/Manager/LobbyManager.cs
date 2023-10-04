@@ -7,7 +7,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//仅作为房主时使用
+
 public class LobbyManager : Singleton<LobbyManager>
 {
     public static Lobby LobbyUI;
@@ -88,6 +88,7 @@ public class LobbyManager : Singleton<LobbyManager>
                 
             Array.Fill(GameManager.Instance.playersInfo.Ready,false);
             lobbyConnector.StartGameClientRpc();
+            NetworkManager.Singleton.SceneManager.LoadScene("Zone2", LoadSceneMode.Single);
         }
         else
         {
@@ -153,6 +154,9 @@ public class LobbyManager : Singleton<LobbyManager>
     //其他玩家离开大厅刷新,仅由Server生效
     private void OnPlayerDisconnect(ulong netId)
     {
+        if(GameManager.Instance.CurrentGameState == GameState.Playing)
+            return;
+        
         int id = GameManager.Instance.FindPlayerIdByClientId((int)netId);
         if(id==-1)
             return;
@@ -184,9 +188,10 @@ public class LobbyManager : Singleton<LobbyManager>
     {
         if (cid == 0)
         {
-            Debug.Log("Server Stop");
+            Debug.Log("房主掉线！");
             LobbyUI.LobbyPanel.gameObject.SetActive(false);
             NetworkManager.Singleton.Shutdown();
+            // LeaveLobby();
         }
     }
     

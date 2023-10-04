@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
+//玩家的数据信息
 public struct PlayerData
 {
     public int HP;
@@ -19,6 +20,7 @@ public struct PlayerData
     
 }
 
+//当前游戏的信息
 public class PlayerGameData
 {
     public PlayerData[] players;
@@ -38,6 +40,7 @@ public class PlayerGameData
     
 }
 
+//当前游戏的逻辑模块
 public class GameDataManager : NetworkSingleton<GameDataManager>
 {
     //public Action OnPlayerAllLoad;
@@ -50,6 +53,7 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
     private GameObject[] characters;
 
     private Vector3 standOffset = new Vector3(0.3f, 0.3f);
+    private GameViewController viewController = new GameViewController();
 
 
     public override void OnNetworkSpawn()
@@ -68,10 +72,18 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
     {
         int id = GameManager.Instance.FindPlayerIdByClientId((int)clientid);
         GameManager.Instance.playersInfo.Ready[id] = true;
+        Debug.Log($"Player {id} has loaded");
         if (CheckAllLoad())
         {
             InitPLayersData();
+            AllPlayersInfo info = GameManager.Instance.playersInfo;
+            TransportString[] transportStrings = new TransportString[info.max];
+            for (int i = 0; i < info.max; i++)
+            {
+                transportStrings[i] = new TransportString(info.PlayerNames[i]);
+            }
             
+            SyncPlayerDataClientRpc(info,transportStrings);
             //测试用
             // if (IsServer)
             // {
@@ -79,10 +91,29 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
             // }
             TurnSetToServerRpc(0);
             
-            
         }
     }
+
+    private void SyncPlayerData()
+    {
+        
+    }
     
+    [ClientRpc]
+    private void SyncPlayerDataClientRpc(AllPlayersInfo info,TransportString[] playerNames)
+    {
+        info.PlayerNames = new string[info.max];
+        for (int i = 0; i < info.max; i++)
+        {
+            Debug.Log(i);
+            info.PlayerNames[i] = playerNames[i].str;
+        }
+        
+        GameManager.Instance.playersInfo = info;
+    }
+    
+    
+
     //测试用
     private async UniTaskVoid Test(int id)
     {
@@ -126,7 +157,7 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
             gameData.players[i].HP = 20;
             int cid = GameManager.Instance.playersInfo.netId[i];
             var p = Instantiate(CharacterPrefab).GetComponent<NetworkObject>();
-            p.SpawnWithOwnership((ulong)cid,false);
+            
             p.DontDestroyWithOwner = true;
             p.transform.position = startPoints[i].transform.position+standOffset;
             //gameData.PlayerAt[i] = startPoints[i];
@@ -139,11 +170,13 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
             
             startPoints[i].Standings.Add(i);
             int character = GameManager.Instance.playersInfo.ChosenCharacter[i];
-            p.GetComponent<SpriteRenderer>().sprite =
-                GameManager.Instance.GameCharacterSpriteList.characters[character];
+            // p.GetComponent<SpriteRenderer>().sprite =
+            //     GameManager.Instance.GameCharacterSpriteList.characters[character];
+            
+            p.SpawnWithOwnership((ulong)cid,false);
         }
     }
-    
+
     //仅Server调用
     [ServerRpc]
     private void TurnSetToServerRpc(int _id)

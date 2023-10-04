@@ -96,7 +96,7 @@ public class LobbyConnector : NetworkBehaviour
         GameManager.Instance.CurrentGameState = GameState.Playing;
         NetworkManager.Singleton.NetworkConfig.EnableSceneManagement = true;
         
-        NetworkManager.Singleton.SceneManager.LoadScene("Zone2", LoadSceneMode.Single);
+        // NetworkManager.Singleton.SceneManager.LoadScene("Zone2", LoadSceneMode.Single);
         // SceneManager.LoadScene("Zone2", LoadSceneMode.Single);
         Debug.Log("YS，启动！");
     }

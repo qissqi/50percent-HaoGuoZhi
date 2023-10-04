@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -78,7 +79,7 @@ public class GameManager : Singleton<GameManager>
 }
 
 [Serializable]
-public struct AllPlayersInfo
+public struct AllPlayersInfo : INetworkSerializable
 {
     public int max;
     public int playerCount;
@@ -100,13 +101,19 @@ public struct AllPlayersInfo
         Array.Fill(netId,-1);
     }
 
-    // public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
-    // {
-    //     serializer.SerializeValue(ref playerCount);
-    //     for (int i = 0; i < playerCount; i++)
-    //     {
-    //         serializer.SerializeValue(ref PlayerNames[i]);
-    //     }
-    //     serializer.SerializeValue(ref ChosenCharacter);
-    // }
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        serializer.SerializeValue(ref max);
+        serializer.SerializeValue(ref playerCount);
+        
+        serializer.SerializeValue(ref Ready);
+
+        // for (int i = 0; i < max; i++)
+        // {
+        //     serializer.SerializeValue( ref PlayerNames[i]);
+        // }
+
+        serializer.SerializeValue(ref ChosenCharacter);
+        serializer.SerializeValue(ref netId);
+    }
 }
