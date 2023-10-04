@@ -96,10 +96,10 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
         }
     }
 
+    [ClientRpc]
     private void InitSceneDataClientRpc(NetworkObjectReference[] characters)
     {
-        // p.GetComponent<SpriteRenderer>().sprite =
-        //     GameManager.Instance.GameCharacterSpriteList.characters[character];
+        viewController.InitSceneData(characters);
     }
 
 
