@@ -45,6 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb829fb02882154b956f5c526a1d6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CharacterPrefab: {fileID: 4380936473685923709, guid: d6486ffe4b5ce8e4da8c432e464e8db2, type: 3}
+  AllRoutes: []
+  startPoints: []
+  myCharacter: {fileID: 0}
+  Steps: 0
+  currentStand: {fileID: 0}
 --- !u!114 &4764948591580146609
 MonoBehaviour:
   m_ObjectHideFlags: 0

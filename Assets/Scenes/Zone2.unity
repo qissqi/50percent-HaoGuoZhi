@@ -134,6 +134,8 @@ GameObject:
   - component: {fileID: 122693429}
   - component: {fileID: 122693431}
   - component: {fileID: 122693430}
+  - component: {fileID: 122693432}
+  - component: {fileID: 122693433}
   m_Layer: 0
   m_Name: Route (29)
   m_TagString: Untagged
@@ -173,7 +175,10 @@ MonoBehaviour:
   - {fileID: 341806460267732766}
   Previous:
   - {fileID: 1059459982}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &122693431
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -226,6 +231,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &122693432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122693428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3757094945
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &122693433
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122693428}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &146330621
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +283,8 @@ GameObject:
   - component: {fileID: 146330622}
   - component: {fileID: 146330624}
   - component: {fileID: 146330623}
+  - component: {fileID: 146330625}
+  - component: {fileID: 146330626}
   m_Layer: 0
   m_Name: Route (21)
   m_TagString: Untagged
@@ -277,7 +325,10 @@ MonoBehaviour:
   - {fileID: 315102186}
   Previous:
   - {fileID: 1435007515}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &146330624
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -330,6 +381,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &146330625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146330621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2514868040
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &146330626
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146330621}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &286319601
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +433,8 @@ GameObject:
   - component: {fileID: 286319602}
   - component: {fileID: 286319604}
   - component: {fileID: 286319603}
+  - component: {fileID: 286319606}
+  - component: {fileID: 286319607}
   m_Layer: 0
   m_Name: Route (14)
   m_TagString: Untagged
@@ -380,7 +474,10 @@ MonoBehaviour:
   - {fileID: 1878508236}
   Previous:
   - {fileID: 363313561075248949}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &286319604
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -433,6 +530,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &286319606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286319601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1029736147
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &286319607
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286319601}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &315102184
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +582,8 @@ GameObject:
   - component: {fileID: 315102185}
   - component: {fileID: 315102187}
   - component: {fileID: 315102186}
+  - component: {fileID: 315102189}
+  - component: {fileID: 315102190}
   m_Layer: 0
   m_Name: Route (28)
   m_TagString: Untagged
@@ -483,7 +623,10 @@ MonoBehaviour:
   - {fileID: 1059459982}
   Previous:
   - {fileID: 146330623}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &315102187
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -536,6 +679,139 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &315102189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315102184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1739975858
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &315102190
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315102184}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
+--- !u!1 &548932051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 548932054}
+  - component: {fileID: 548932053}
+  - component: {fileID: 548932052}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!81 &548932052
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548932051}
+  m_Enabled: 1
+--- !u!20 &548932053
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548932051}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &548932054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548932051}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.4, y: -2.5, z: -20}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &692510569
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +823,8 @@ GameObject:
   - component: {fileID: 692510570}
   - component: {fileID: 692510572}
   - component: {fileID: 692510571}
+  - component: {fileID: 692510574}
+  - component: {fileID: 692510575}
   m_Layer: 0
   m_Name: Route (16)
   m_TagString: Untagged
@@ -586,7 +864,10 @@ MonoBehaviour:
   - {fileID: 1057497637}
   Previous:
   - {fileID: 1762619891}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &692510572
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -639,6 +920,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &692510574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692510569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 141395485
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &692510575
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692510569}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &698163842
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,6 +972,8 @@ GameObject:
   - component: {fileID: 698163843}
   - component: {fileID: 698163845}
   - component: {fileID: 698163844}
+  - component: {fileID: 698163847}
+  - component: {fileID: 698163848}
   m_Layer: 0
   m_Name: Route (19)
   m_TagString: Untagged
@@ -689,7 +1013,10 @@ MonoBehaviour:
   - {fileID: 1435007515}
   Previous:
   - {fileID: 1910583515}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &698163845
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -742,6 +1069,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &698163847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698163842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1442959986
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &698163848
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698163842}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &716083171
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +1121,8 @@ GameObject:
   - component: {fileID: 716083172}
   - component: {fileID: 716083174}
   - component: {fileID: 716083173}
+  - component: {fileID: 716083176}
+  - component: {fileID: 716083177}
   m_Layer: 0
   m_Name: Route (26)
   m_TagString: Untagged
@@ -792,7 +1162,10 @@ MonoBehaviour:
   - {fileID: 1059459982}
   Previous:
   - {fileID: 742482951}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &716083174
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -845,6 +1218,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &716083176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716083171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2021092719
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &716083177
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716083171}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &742482949
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,6 +1270,8 @@ GameObject:
   - component: {fileID: 742482950}
   - component: {fileID: 742482952}
   - component: {fileID: 742482951}
+  - component: {fileID: 742482954}
+  - component: {fileID: 742482955}
   m_Layer: 0
   m_Name: Route (25)
   m_TagString: Untagged
@@ -895,7 +1311,10 @@ MonoBehaviour:
   - {fileID: 716083173}
   Previous:
   - {fileID: 2126804280}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &742482952
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -948,6 +1367,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &742482954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742482949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 475188711
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &742482955
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742482949}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &796846939
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,6 +1419,8 @@ GameObject:
   - component: {fileID: 796846940}
   - component: {fileID: 796846942}
   - component: {fileID: 796846941}
+  - component: {fileID: 796846944}
+  - component: {fileID: 796846945}
   m_Layer: 0
   m_Name: Route (22)
   m_TagString: Untagged
@@ -998,7 +1460,10 @@ MonoBehaviour:
   - {fileID: 1911665427}
   Previous:
   - {fileID: 146330623}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &796846942
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1051,6 +1516,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &796846944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796846939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1726892274
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &796846945
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796846939}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &1057497635
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,6 +1568,8 @@ GameObject:
   - component: {fileID: 1057497636}
   - component: {fileID: 1057497638}
   - component: {fileID: 1057497637}
+  - component: {fileID: 1057497640}
+  - component: {fileID: 1057497641}
   m_Layer: 0
   m_Name: Route (17)
   m_TagString: Untagged
@@ -1101,7 +1609,10 @@ MonoBehaviour:
   - {fileID: 1910583515}
   Previous:
   - {fileID: 692510571}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &1057497638
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1154,6 +1665,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1057497640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057497635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2391480009
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &1057497641
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057497635}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &1059459980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,6 +1717,8 @@ GameObject:
   - component: {fileID: 1059459981}
   - component: {fileID: 1059459983}
   - component: {fileID: 1059459982}
+  - component: {fileID: 1059459985}
+  - component: {fileID: 1059459986}
   m_Layer: 0
   m_Name: Route (27)
   m_TagString: Untagged
@@ -1205,7 +1759,10 @@ MonoBehaviour:
   Previous:
   - {fileID: 716083173}
   - {fileID: 315102186}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &1059459983
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1258,6 +1815,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1059459985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059459980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1189283852
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &1059459986
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059459980}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &1435007513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,6 +1867,8 @@ GameObject:
   - component: {fileID: 1435007514}
   - component: {fileID: 1435007516}
   - component: {fileID: 1435007515}
+  - component: {fileID: 1435007518}
+  - component: {fileID: 1435007519}
   m_Layer: 0
   m_Name: Route (20)
   m_TagString: Untagged
@@ -1308,7 +1908,10 @@ MonoBehaviour:
   - {fileID: 146330623}
   Previous:
   - {fileID: 698163844}
+  Standings: 
   IsStartPoint: 1
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &1435007516
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1361,6 +1964,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1435007518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435007513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 641276721
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &1435007519
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435007513}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &1488342216
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,6 +2169,8 @@ GameObject:
   - component: {fileID: 1648853721}
   - component: {fileID: 1648853723}
   - component: {fileID: 1648853722}
+  - component: {fileID: 1648853725}
+  - component: {fileID: 1648853726}
   m_Layer: 0
   m_Name: Route (11)
   m_TagString: Untagged
@@ -1564,7 +2210,10 @@ MonoBehaviour:
   - {fileID: 1893070284}
   Previous:
   - {fileID: 5880624681001019245}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &1648853723
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1617,6 +2266,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1648853725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648853720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3496041512
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &1648853726
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648853720}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &1762619889
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,6 +2318,8 @@ GameObject:
   - component: {fileID: 1762619890}
   - component: {fileID: 1762619892}
   - component: {fileID: 1762619891}
+  - component: {fileID: 1762619894}
+  - component: {fileID: 1762619895}
   m_Layer: 0
   m_Name: Route (15)
   m_TagString: Untagged
@@ -1667,7 +2359,10 @@ MonoBehaviour:
   - {fileID: 692510571}
   Previous:
   - {fileID: 286319603}
+  Standings: 
   IsStartPoint: 1
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &1762619892
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1720,6 +2415,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1762619894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762619889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2514327828
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &1762619895
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762619889}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &1878508234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,6 +2467,8 @@ GameObject:
   - component: {fileID: 1878508235}
   - component: {fileID: 1878508237}
   - component: {fileID: 1878508236}
+  - component: {fileID: 1878508239}
+  - component: {fileID: 1878508240}
   m_Layer: 0
   m_Name: Route (13)
   m_TagString: Untagged
@@ -1771,7 +2509,10 @@ MonoBehaviour:
   Previous:
   - {fileID: 286319603}
   - {fileID: 1893070284}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &1878508237
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1824,6 +2565,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1878508239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878508234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1710093116
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &1878508240
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878508234}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &1893070282
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,6 +2617,8 @@ GameObject:
   - component: {fileID: 1893070283}
   - component: {fileID: 1893070285}
   - component: {fileID: 1893070284}
+  - component: {fileID: 1893070287}
+  - component: {fileID: 1893070288}
   m_Layer: 0
   m_Name: Route (12)
   m_TagString: Untagged
@@ -1874,7 +2658,10 @@ MonoBehaviour:
   - {fileID: 1878508236}
   Previous:
   - {fileID: 1648853722}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &1893070285
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1927,6 +2714,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1893070287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893070282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 385506268
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &1893070288
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893070282}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &1910583513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,6 +2766,8 @@ GameObject:
   - component: {fileID: 1910583514}
   - component: {fileID: 1910583516}
   - component: {fileID: 1910583515}
+  - component: {fileID: 1910583518}
+  - component: {fileID: 1910583519}
   m_Layer: 0
   m_Name: Route (18)
   m_TagString: Untagged
@@ -1977,7 +2807,10 @@ MonoBehaviour:
   - {fileID: 698163844}
   Previous:
   - {fileID: 1057497637}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &1910583516
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2030,6 +2863,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1910583518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910583513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2073728701
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &1910583519
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910583513}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &1911665425
 GameObject:
   m_ObjectHideFlags: 0
@@ -2041,6 +2915,8 @@ GameObject:
   - component: {fileID: 1911665426}
   - component: {fileID: 1911665428}
   - component: {fileID: 1911665427}
+  - component: {fileID: 1911665430}
+  - component: {fileID: 1911665431}
   m_Layer: 0
   m_Name: Route (23)
   m_TagString: Untagged
@@ -2080,7 +2956,10 @@ MonoBehaviour:
   - {fileID: 2126804280}
   Previous:
   - {fileID: 796846941}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &1911665428
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2133,6 +3012,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1911665430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911665425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3093782888
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &1911665431
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911665425}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &2126804278
 GameObject:
   m_ObjectHideFlags: 0
@@ -2144,6 +3064,8 @@ GameObject:
   - component: {fileID: 2126804279}
   - component: {fileID: 2126804281}
   - component: {fileID: 2126804280}
+  - component: {fileID: 2126804283}
+  - component: {fileID: 2126804284}
   m_Layer: 0
   m_Name: Route (24)
   m_TagString: Untagged
@@ -2183,7 +3105,10 @@ MonoBehaviour:
   - {fileID: 742482951}
   Previous:
   - {fileID: 1911665427}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &2126804281
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2236,6 +3161,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2126804283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126804278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3626113009
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &2126804284
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126804278}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!114 &262093332397406559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2253,7 +3219,10 @@ MonoBehaviour:
   - {fileID: 5029841270680823942}
   Previous:
   - {fileID: 7126785345409839971}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!1 &285989393439749590
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,6 +3234,8 @@ GameObject:
   - component: {fileID: 947200798140955856}
   - component: {fileID: 8124717689293120193}
   - component: {fileID: 5880624681001019245}
+  - component: {fileID: 8124717689293120195}
+  - component: {fileID: 8124717689293120196}
   m_Layer: 0
   m_Name: Route (10)
   m_TagString: Untagged
@@ -2289,7 +3260,10 @@ MonoBehaviour:
   - {fileID: 5452907130163965560}
   Previous:
   - {fileID: 122693430}
+  Standings: 
   IsStartPoint: 1
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!114 &363313561075248949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2308,7 +3282,10 @@ MonoBehaviour:
   - {fileID: 7126785346806480809}
   Previous:
   - {fileID: 7126785346806480809}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!4 &415700076039602963
 Transform:
   m_ObjectHideFlags: 0
@@ -2387,6 +3364,8 @@ GameObject:
   - component: {fileID: 415700076039602963}
   - component: {fileID: 8656257884469845250}
   - component: {fileID: 6448543210509441198}
+  - component: {fileID: 8656257884469845252}
+  - component: {fileID: 8656257884469845253}
   m_Layer: 0
   m_Name: Route (9)
   m_TagString: Untagged
@@ -2420,6 +3399,8 @@ GameObject:
   - component: {fileID: 7508162129267959164}
   - component: {fileID: 2692430649299444426}
   - component: {fileID: 262093332397406559}
+  - component: {fileID: 7508162129267959166}
+  - component: {fileID: 7508162129267959167}
   m_Layer: 0
   m_Name: Route (5)
   m_TagString: Untagged
@@ -2630,7 +3611,10 @@ MonoBehaviour:
   - {fileID: 7126785345409839971}
   Previous:
   - {fileID: 5808201260272616671}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!1 &3300701978113161664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2642,6 +3626,8 @@ GameObject:
   - component: {fileID: 4409667775098250555}
   - component: {fileID: 5474653809878955586}
   - component: {fileID: 5029841270680823942}
+  - component: {fileID: 5474653809878955588}
+  - component: {fileID: 5474653809878955589}
   m_Layer: 0
   m_Name: Route (6)
   m_TagString: Untagged
@@ -2660,6 +3646,8 @@ GameObject:
   - component: {fileID: 4494138764540602590}
   - component: {fileID: 4880647245756577487}
   - component: {fileID: 7126785345409839971}
+  - component: {fileID: 7126785345409839973}
+  - component: {fileID: 7126785345409839974}
   m_Layer: 0
   m_Name: Route (4)
   m_TagString: Untagged
@@ -2678,6 +3666,8 @@ GameObject:
   - component: {fileID: 4494138765392372756}
   - component: {fileID: 4880647246875998725}
   - component: {fileID: 7126785346806480809}
+  - component: {fileID: 7126785346806480811}
+  - component: {fileID: 7126785346806480812}
   m_Layer: 0
   m_Name: Route (8)
   m_TagString: Untagged
@@ -2696,6 +3686,8 @@ GameObject:
   - component: {fileID: 2910799542401550690}
   - component: {fileID: 6822554429633583643}
   - component: {fileID: 5808201260272616671}
+  - component: {fileID: 6822554429633583645}
+  - component: {fileID: 6822554429633583646}
   m_Layer: 0
   m_Name: Route (2)
   m_TagString: Untagged
@@ -2869,7 +3861,10 @@ MonoBehaviour:
   - {fileID: 363313561075248949}
   Previous:
   - {fileID: 262093332397406559}
+  Standings: 
   IsStartPoint: 1
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!1 &5089433772522965819
 GameObject:
   m_ObjectHideFlags: 0
@@ -2881,6 +3876,8 @@ GameObject:
   - component: {fileID: 8940499409160908305}
   - component: {fileID: 2737344957347336203}
   - component: {fileID: 3005250064514432640}
+  - component: {fileID: 8940499409160908307}
+  - component: {fileID: 8940499409160908308}
   m_Layer: 0
   m_Name: Route (3)
   m_TagString: Untagged
@@ -2905,7 +3902,10 @@ MonoBehaviour:
   - {fileID: 5808201260272616671}
   Previous:
   - {fileID: 341806460267732766}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &5474653809878955586
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2958,6 +3958,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5474653809878955588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3300701978113161664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 4116963767
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &5474653809878955589
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3300701978113161664}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!114 &5808201260272616671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2975,7 +4016,10 @@ MonoBehaviour:
   - {fileID: 3005250064514432640}
   Previous:
   - {fileID: 5452907130163965560}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!4 &5813439139156262820
 Transform:
   m_ObjectHideFlags: 0
@@ -3008,7 +4052,10 @@ MonoBehaviour:
   - {fileID: 1648853722}
   Previous:
   - {fileID: 6448543210509441198}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!1 &5953892449132603097
 GameObject:
   m_ObjectHideFlags: 0
@@ -3020,6 +4067,8 @@ GameObject:
   - component: {fileID: 2323263631012868699}
   - component: {fileID: 7877593111915640301}
   - component: {fileID: 5452907130163965560}
+  - component: {fileID: 7877593111915640303}
+  - component: {fileID: 7877593111915640304}
   m_Layer: 0
   m_Name: Route (1)
   m_TagString: Untagged
@@ -3038,6 +4087,8 @@ GameObject:
   - component: {fileID: 6343137333795914915}
   - component: {fileID: 2729938279173642930}
   - component: {fileID: 341806460267732766}
+  - component: {fileID: 6343137333795914917}
+  - component: {fileID: 6343137333795914918}
   m_Layer: 0
   m_Name: Route
   m_TagString: Untagged
@@ -3060,6 +4111,47 @@ Transform:
   m_Father: {fileID: 1543003392}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6343137333795914917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6258439981808061861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1923606537
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &6343137333795914918
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6258439981808061861}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!114 &6448543210509441198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3077,7 +4169,10 @@ MonoBehaviour:
   - {fileID: 5880624681001019245}
   Previous:
   - {fileID: 7126785346806480809}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
 --- !u!212 &6822554429633583643
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3130,6 +4225,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6822554429633583645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4078298975388308889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1031026817
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &6822554429633583646
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4078298975388308889}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1001 &6981686489194140305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3190,10 +4326,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7980717245955153852, guid: ab50a17afa88a3743b11cd885a1b3a3e, type: 3}
-      propertyPath: CharacterPrefab
-      value: 
-      objectReference: {fileID: 4380936473685923709, guid: d6486ffe4b5ce8e4da8c432e464e8db2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3216,7 +4348,51 @@ MonoBehaviour:
   - {fileID: 262093332397406559}
   Previous:
   - {fileID: 3005250064514432640}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
+--- !u!114 &7126785345409839973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3495717623141261784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2386529746
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &7126785345409839974
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3495717623141261784}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!114 &7126785346806480809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3234,7 +4410,51 @@ MonoBehaviour:
   - {fileID: 6448543210509441198}
   Previous:
   - {fileID: 363313561075248949}
+  Standings: 
   IsStartPoint: 0
+  State: 0
+  Renderer: {fileID: 0}
+--- !u!114 &7126785346806480811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3495717623892503826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2604381723
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &7126785346806480812
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3495717623892503826}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!4 &7508162129267959164
 Transform:
   m_ObjectHideFlags: 0
@@ -3250,6 +4470,47 @@ Transform:
   m_Father: {fileID: 1543003392}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7508162129267959166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922971038186500606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3664124886
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &7508162129267959167
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922971038186500606}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!1 &7646894247319788174
 GameObject:
   m_ObjectHideFlags: 0
@@ -3261,6 +4522,8 @@ GameObject:
   - component: {fileID: 5813439139156262820}
   - component: {fileID: 667505249112015294}
   - component: {fileID: 363313561075248949}
+  - component: {fileID: 7646894247319788176}
+  - component: {fileID: 7646894247319788177}
   m_Layer: 0
   m_Name: Route (7)
   m_TagString: Untagged
@@ -3268,6 +4531,47 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7646894247319788176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646894247319788174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1617962743
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &7646894247319788177
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646894247319788174}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!212 &7877593111915640301
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3320,6 +4624,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7877593111915640303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5953892449132603097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2852152348
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &7877593111915640304
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5953892449132603097}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!212 &8124717689293120193
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3372,6 +4717,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8124717689293120195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285989393439749590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1610607125
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &8124717689293120196
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285989393439749590}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!212 &8656257884469845250
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3424,6 +4810,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8656257884469845252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799941753205983765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 38341697
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &8656257884469845253
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799941753205983765}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
 --- !u!4 &8940499409160908305
 Transform:
   m_ObjectHideFlags: 0
@@ -3439,3 +4866,44 @@ Transform:
   m_Father: {fileID: 1543003392}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8940499409160908307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5089433772522965819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2766110054
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!65 &8940499409160908308
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5089433772522965819}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0.64, y: 0.64, z: 0}
