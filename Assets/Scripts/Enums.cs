@@ -26,6 +26,15 @@ public enum RouteState
     MultiWay=1<<2
 }
 
+[System.Flags]
+public enum RouteMark
+{
+    None = 0,
+    StepEnd = 1<< 0,
+    StepStart = 1<< 1
+}
+
+
 public struct ApprovalDeclinedReason
 {
     public const string NEEDPASSWORD = "Need Password";

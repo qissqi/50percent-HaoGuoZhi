@@ -67,8 +67,8 @@ public class MainMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            startPanel.SetActive(true);
-            gameObject.SetActive(false);
+            // startPanel.SetActive(true);
+            // gameObject.SetActive(false);
         }
         
     }

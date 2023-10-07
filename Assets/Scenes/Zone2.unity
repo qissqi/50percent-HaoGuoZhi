@@ -178,7 +178,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &122693431
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -328,7 +328,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &146330624
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -477,7 +477,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &286319604
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -626,7 +626,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &315102187
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -867,7 +867,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &692510572
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1016,7 +1016,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &698163845
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1165,7 +1165,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &716083174
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1314,7 +1314,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &742482952
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1463,7 +1463,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &796846942
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1612,7 +1612,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &1057497638
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1762,7 +1762,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &1059459983
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1911,7 +1911,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 1
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &1435007516
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2213,7 +2213,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &1648853723
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2362,7 +2362,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 1
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &1762619892
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2512,7 +2512,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &1878508237
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2661,7 +2661,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &1893070285
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2810,7 +2810,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &1910583516
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2959,7 +2959,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &1911665428
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3108,7 +3108,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &2126804281
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3222,7 +3222,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!1 &285989393439749590
 GameObject:
   m_ObjectHideFlags: 0
@@ -3263,7 +3263,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 1
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!114 &363313561075248949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3285,7 +3285,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!4 &415700076039602963
 Transform:
   m_ObjectHideFlags: 0
@@ -3614,7 +3614,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!1 &3300701978113161664
 GameObject:
   m_ObjectHideFlags: 0
@@ -3864,7 +3864,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 1
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!1 &5089433772522965819
 GameObject:
   m_ObjectHideFlags: 0
@@ -3905,7 +3905,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &5474653809878955586
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4019,7 +4019,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!4 &5813439139156262820
 Transform:
   m_ObjectHideFlags: 0
@@ -4055,7 +4055,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!1 &5953892449132603097
 GameObject:
   m_ObjectHideFlags: 0
@@ -4172,7 +4172,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!212 &6822554429633583643
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4351,7 +4351,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!114 &7126785345409839973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4413,7 +4413,7 @@ MonoBehaviour:
   Standings: 
   IsStartPoint: 0
   State: 0
-  Renderer: {fileID: 0}
+  Mark: 0
 --- !u!114 &7126785346806480811
 MonoBehaviour:
   m_ObjectHideFlags: 0

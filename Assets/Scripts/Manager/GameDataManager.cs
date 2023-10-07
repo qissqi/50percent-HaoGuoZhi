@@ -64,7 +64,7 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
     public Action OnTurnStartAction;
     public Action OnTurnEndAction;
 
-    [FormerlySerializedAs("myNetObject")] [FormerlySerializedAs("MyCharacter")] [Header("MyState")] 
+    [Header("MyState")] 
     public NetworkObject myCharacter;
     public int Steps;
     public Route currentStand;
@@ -104,7 +104,16 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
 
         if (Input.GetKeyDown(KeyCode.M))
         {
+            ClearRoutesMark();
             RollDice_Move_ServerRpc(NetPlayer.OwnerInstance.GivenId);
+        }
+    }
+
+    private void ClearRoutesMark()
+    {
+        foreach (var route in AllRoutes)
+        {
+            route.Mark = RouteMark.None;
         }
     }
 
@@ -311,6 +320,7 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
         }
 
         int value = Random.Range(1, 7);
+        // int value = Random.Range(50, 100);
         gameData.leftSteps = value;
         RollDice_Move_ClientRpc(id,value);
         
@@ -322,6 +332,7 @@ public class GameDataManager : NetworkSingleton<GameDataManager>
         if (id != NetPlayer.OwnerInstance.GivenId)
             return;
         
+        Debug.Log("steps: "+steps);
         Steps = steps;
         viewController.StateSetMove();
         
